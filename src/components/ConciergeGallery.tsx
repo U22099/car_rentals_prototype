@@ -42,7 +42,8 @@ export default function ConciergeGallery({
         <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
           {rentalFleet.map((vehicle) => {
             const isSelected = selectedVehicleId === vehicle.id;
-            const showImage = vehicle.image && !failedImages.includes(vehicle.id);
+            const imageSrc = vehicle.image ?? "";
+            const showImage = Boolean(imageSrc) && !failedImages.includes(vehicle.id);
             const VehicleIcon = vehicle.name.includes("Bus")
               ? AirportShuttleIcon
               : DirectionsCarFilledIcon;
@@ -60,9 +61,9 @@ export default function ConciergeGallery({
                 }`}
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#22211d]">
-                  {showImage ? (
+                  {showImage && imageSrc ? (
                     <Image
-                      src={vehicle.image}
+                      src={imageSrc}
                       alt={vehicle.imageNote ? `${vehicle.imageNote} for ${vehicle.name}` : vehicle.name}
                       fill
                       sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw"

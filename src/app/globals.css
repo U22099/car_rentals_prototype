@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  --font-playfair: "Georgia", "Times New Roman", serif;
+  --font-inter: "Segoe UI", sans-serif;
+
   /* Surface & Page Backgrounds */
   --color-bg-primary: #0d0d0b;
   --color-bg-secondary: #11110f;

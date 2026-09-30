@@ -2,36 +2,36 @@
 
 :root {
   /* Surface & Page Backgrounds */
-  --color-bg-primary: #09090b;
-  --color-bg-secondary: #060708;
-  --color-surface-card: #111113;
-  --color-surface-elevated: #18181b;
-  --color-surface-interactive: #27272a;
-  --color-surface-interactive-hover: #3f3f46;
+  --color-bg-primary: #0d0d0b;
+  --color-bg-secondary: #11110f;
+  --color-surface-card: #171715;
+  --color-surface-elevated: #211f1a;
+  --color-surface-interactive: #292720;
+  --color-surface-interactive-hover: #39352a;
 
   /* Glass Effects */
   --color-glass: rgba(255, 255, 255, 0.04);
-  --color-glass-dark: rgba(9, 9, 11, 0.85);
+  --color-glass-dark: rgba(13, 13, 11, 0.94);
 
   /* Border Colors */
   --color-border-subtle: rgba(255, 255, 255, 0.06);
   --color-border-light: rgba(255, 255, 255, 0.1);
-  --color-border-default: #27272a;
-  --color-border-muted: #3f3f46;
-  --color-border-hover: #52525b;
+  --color-border-default: #35332c;
+  --color-border-muted: #4a473d;
+  --color-border-hover: #b4913a;
 
   /* Typography / Text Colors */
   --color-text-primary: #ffffff;
-  --color-text-body: #e4e4e7;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
-  --color-text-dim: #52525b;
-  --color-text-disabled: #3f3f46;
+  --color-text-body: #eeece5;
+  --color-text-secondary: #c4c0b5;
+  --color-text-muted: #a09b8f;
+  --color-text-dim: #817b6f;
+  --color-text-disabled: #58554e;
 
   /* Accent & Action Colors */
-  --color-accent-primary: #ffffff;
-  --color-accent-contrast: #000000;
-  --color-accent-hover: #f4f4f5;
+  --color-accent-primary: #d7b75d;
+  --color-accent-contrast: #11100d;
+  --color-accent-hover: #e8cf83;
 
   /* Brand / WhatsApp */
   --color-brand-whatsapp: #25d366;
@@ -41,16 +41,18 @@
   --color-brand-whatsapp-glow: rgba(37, 211, 102, 0.35);
 
   /* Brand Logo Accent */
-  --color-logo-stroke: #d4af37;
-  --color-logo-fill: rgba(212, 175, 55, 0.08);
+  --color-logo-stroke: #d7b75d;
+  --color-logo-fill: rgba(215, 183, 93, 0.1);
+  --radius-control: 14px;
+  --radius-card: 20px;
 
   /* Zinc Palette Scale */
   --color-zinc-950: #09090b;
   --color-zinc-900: #111113;
   --color-zinc-850: #18181b;
-  --color-zinc-800: #27272a;
-  --color-zinc-700: #3f3f46;
-  --color-zinc-600: #52525b;
+  --color-zinc-800: #282722;
+  --color-zinc-700: #403e36;
+  --color-zinc-600: #5a574d;
   --color-zinc-500: #71717a;
   --color-zinc-400: #a1a1aa;
   --color-zinc-300: #d4d4d8;
@@ -98,22 +100,34 @@
   --color-zinc-200: var(--color-zinc-200);
   --color-zinc-100: var(--color-zinc-100);
 
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), "Segoe UI", sans-serif;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+button:not(.calendar-day) {
+  border-radius: var(--radius-control);
+  touch-action: manipulation;
+}
+
+input,
+textarea {
+  border-radius: 12px;
+}
+
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-body);
-  font-family: var(--font-sans);
+  font-family: var(--font-inter), "Segoe UI", sans-serif;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -162,14 +176,16 @@ body {
 
 /* Calendar styles */
 .calendar-day {
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 44px;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 0.8125rem;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all 0.15s ease;
   position: relative;
 }
@@ -189,21 +205,21 @@ body {
   background: var(--color-accent-primary);
   color: var(--color-accent-contrast);
   font-weight: 700;
-  border-radius: 6px 0 0 6px;
+  border-radius: 4px 0 0 4px;
 }
 
 .calendar-day.range-end {
   background: var(--color-accent-primary);
   color: var(--color-accent-contrast);
   font-weight: 700;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 4px 4px 0;
 }
 
 .calendar-day.selected {
   background: var(--color-accent-primary);
   color: var(--color-accent-contrast);
   font-weight: 700;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .calendar-day.today:not(.selected):not(.in-range):not(.range-start):not(.range-end) {
@@ -217,7 +233,7 @@ body {
 }
 
 .calendar-day.range-start.range-end {
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 /* Animations */
@@ -263,3 +279,16 @@ body {
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

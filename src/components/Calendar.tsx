@@ -86,7 +86,7 @@ function MonthCalendar({
       <div className="grid grid-cols-7">
         {cells.map((date, idx) => {
           if (!date) {
-            return <div key={`empty-${idx}`} className="h-9" />;
+            return <div key={`empty-${idx}`} className="h-11" />;
           }
 
           const isPast = isBeforeDay(date, today);
@@ -118,25 +118,20 @@ function MonthCalendar({
           }
 
           return (
-            <div key={date.toISOString()} className="flex justify-center items-center h-9">
-              <div
+            <div key={date.toISOString()} className="flex justify-center items-center h-11">
+              <button
+                type="button"
+                disabled={isPast}
                 className={cls}
-                onClick={() => !isPast && onDayClick(date)}
+                onClick={() => onDayClick(date)}
                 onMouseEnter={() => !isPast && onDayHover(date)}
                 onMouseLeave={() => onDayHover(null)}
-                role="button"
-                tabIndex={isPast ? -1 : 0}
                 aria-label={date.toLocaleDateString("en-US", {
                   weekday: "long", year: "numeric", month: "long", day: "numeric",
                 })}
-                onKeyDown={(e) => {
-                  if ((e.key === "Enter" || e.key === " ") && !isPast) {
-                    onDayClick(date);
-                  }
-                }}
               >
                 {date.getDate()}
-              </div>
+              </button>
             </div>
           );
         })}
@@ -226,14 +221,14 @@ export default function Calendar({ value, onChange }: CalendarProps) {
         <button
           onClick={prevMonth}
           disabled={!canGoPrev}
-          className="p-1.5 rounded-full hover:bg-white/10 transition-colors disabled:opacity-20 disabled:cursor-not-allowed text-zinc-300"
+          className="grid size-11 place-items-center rounded-full hover:bg-white/10 transition-colors disabled:opacity-20 disabled:cursor-not-allowed text-zinc-300"
           aria-label="Previous month"
         >
           <ChevronLeftIcon sx={{ fontSize: 18 }} />
         </button>
         <button
           onClick={nextMonth}
-          className="p-1.5 rounded-full hover:bg-white/10 transition-colors text-zinc-300"
+          className="grid size-11 place-items-center rounded-full hover:bg-white/10 transition-colors text-zinc-300"
           aria-label="Next month"
         >
           <ChevronRightIcon sx={{ fontSize: 18 }} />

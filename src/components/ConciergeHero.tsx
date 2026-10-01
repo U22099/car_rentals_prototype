@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import TikTokIcon from "./TikTokIcon";
+import { brand } from "@/lib/properties";
 
 interface ConciergeHeroProps {
   brandName: string;
@@ -42,15 +44,25 @@ export default function ConciergeHero({ brandName }: ConciergeHeroProps) {
           <p className="mt-4 text-sm sm:text-base font-serif italic text-[#e2c56e] animate-fadeInUp delay-100">
             Your Cargo, Our Priority.
           </p>
-          <div className="mt-7 sm:mt-9 animate-fadeInUp delay-200">
+          <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-3.5 animate-fadeInUp delay-200">
             <button
               type="button"
               onClick={scrollToBooking}
-              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-accent-primary px-8 text-sm font-semibold text-accent-contrast shadow-[0_12px_35px_rgba(215,183,93,0.22)] transition-all hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-accent-primary px-8 text-sm font-semibold text-accent-contrast shadow-[0_12px_35px_rgba(215,183,93,0.22)] transition-all hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white cursor-pointer"
             >
               Book a session
               <ArrowDownwardIcon sx={{ fontSize: 18 }} />
             </button>
+            <a
+              href={brand.socials.tiktok.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Follow ${brandName} on TikTok: ${brand.socials.tiktok.handle}`}
+              className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-6 text-sm font-semibold text-white transition-all hover:bg-white/10 hover:border-[#d7b75d] hover:text-[#e2c56e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              <TikTokIcon className="size-4 shrink-0 text-[#e2c56e]" />
+              <span>Watch on TikTok</span>
+            </a>
           </div>
         </div>
       </div>

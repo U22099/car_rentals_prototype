@@ -12,7 +12,9 @@ import PeopleIcon from "@mui/icons-material/People";
 import PlaceIcon from "@mui/icons-material/Place";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Calendar from "./Calendar";
+import TikTokIcon from "./TikTokIcon";
 import { rentalFleet } from "@/lib/fleet";
+import { brand } from "@/lib/properties";
 
 interface ConciergeFlowProps {
   brandName: string;
@@ -358,6 +360,32 @@ export default function ConciergeFlow({
               <div><span className="block text-zinc-500 uppercase text-[10px]">Duration</span><span className="block text-white font-semibold mt-1">About {days} day{days === 1 ? "" : "s"}</span></div>
               <div><span className="block text-zinc-500 uppercase text-[10px]">Passengers</span><span className="block text-white font-semibold mt-1">{passengers}</span></div>
             </div>
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-zinc-900/90 via-zinc-800/60 to-zinc-900/90 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-black/40 border border-[#d7b75d]/40 text-[#e2c56e]">
+                  <TikTokIcon className="size-5" />
+                </div>
+                <div>
+                  <p className="text-white text-sm font-semibold flex items-center gap-2">
+                    See our fleet in action on TikTok
+                    <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#d7b75d]/20 text-[#e2c56e] border border-[#d7b75d]/30">Live Videos</span>
+                  </p>
+                  <p className="text-zinc-400 text-xs mt-0.5">
+                    Watch walkthroughs of our luxury SUVs &amp; buses at <span className="text-[#e2c56e] font-medium">{brand.socials.tiktok.handle}</span>
+                  </p>
+                </div>
+              </div>
+              <a
+                href={brand.socials.tiktok.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-10 items-center justify-center gap-2 px-4 rounded-full border border-white/20 bg-white/5 hover:border-[#d7b75d] hover:bg-[#d7b75d]/10 hover:text-[#e2c56e] text-zinc-200 text-xs font-semibold transition-all shrink-0 self-start sm:self-center"
+              >
+                <TikTokIcon className="size-3.5 text-[#e2c56e]" />
+                <span>View on TikTok</span>
+              </a>
+            </div>
+
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
               className="flex min-h-14 w-full items-center justify-center gap-3 rounded-full px-4 bg-[#25d366] text-[#071b0e] font-bold text-sm sm:text-base hover:bg-[#49e384] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
               <WhatsAppIcon sx={{ fontSize: 22 }} />Send request on WhatsApp

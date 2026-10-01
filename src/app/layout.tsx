@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import { brand } from "@/lib/properties";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -16,13 +15,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${brand.name} | Executive Vehicle Hire`,
+  title: "Apex Luxury Auto — Exotic & Executive Car Rentals",
   description:
-    `${brand.tagline} Executive cars and group vehicles for hire. Request a vehicle and confirm availability with our team on WhatsApp.`,
-  keywords: "Landpeace Logistics, car hire, executive vehicle hire, Prado rental, Lexus GX 460, Hilux, Land Cruiser, Sprinter bus, Coastal bus, Lexus LX 600",
+    "Reserve exotic supercars, ultra-luxury sedans, and armored executive SUVs with VIP chauffeur options. Instant direct WhatsApp confirmation.",
+  keywords: "luxury car rental, exotic supercars, rolls royce, lamborghini, maybach, chauffeur service, lagos car rental",
   openGraph: {
-    title: `${brand.name} | Executive Vehicle Hire`,
-    description: `${brand.tagline} Request executive and group vehicles directly on WhatsApp.`,
+    title: "Apex Luxury Auto — Exotic & Executive Car Rentals",
+    description: "Reserve exotic supercars and luxury chauffeur saloons directly via WhatsApp.",
     type: "website",
   },
 };

@@ -1,57 +1,72 @@
 "use client";
 
-import Image from "next/image";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
+import TuneIcon from "@mui/icons-material/Tune";
 
 interface ConciergeHeroProps {
   brandName: string;
+  phone: string;
 }
 
-export default function ConciergeHero({ brandName }: ConciergeHeroProps) {
-  const scrollToBooking = () => {
-    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth", block: "start" });
+export default function ConciergeHero({ brandName, phone }: ConciergeHeroProps) {
+  const scrollToConsultation = () => {
+    document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative isolate min-h-[650px] sm:min-h-[690px] flex items-center px-5 sm:px-8 lg:px-12 py-16 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="/toyota_land_cruiser_300_1789978397588.jpg"
-          alt="Toyota Land Cruiser available for hire"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[57%_50%]"
+    <section className="relative min-h-[72vh] sm:min-h-[85vh] flex items-end pb-8 sm:pb-16 px-4 sm:px-6 pt-12 sm:pt-14 overflow-hidden">
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=85&auto=format&fit=crop"
+          alt="Luxury automotive fleet"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0b] via-[#0d0d0b]/88 to-[#0d0d0b]/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0b]/65 via-transparent to-[#0d0d0b]/30" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a747]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/70 to-bg-primary/15" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="max-w-2xl">
-          <p className="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-[#e2c56e] font-semibold mb-5 animate-fadeIn">
-            {brandName} <span className="text-white/45 px-1.5">/</span> Executive &amp; group vehicle hire
-          </p>
-          <h1 className="text-[42px] sm:text-6xl lg:text-[76px] font-semibold text-white leading-[1.02] max-w-[760px] animate-fadeInUp">
-            The right vehicle<br className="hidden sm:block" /> for your next move.
-          </h1>
-          <p className="mt-5 sm:mt-6 text-[#d8d5cc] text-sm sm:text-base max-w-lg leading-relaxed animate-fadeInUp delay-100">
-            From a Prado for the daily run to a bus for the whole team, find a vehicle that fits your plans. Tell us what you need and confirm availability directly on WhatsApp.
-          </p>
-          <p className="mt-4 text-sm sm:text-base font-serif italic text-[#e2c56e] animate-fadeInUp delay-100">
-            Your Cargo, Our Priority.
-          </p>
-          <div className="mt-7 sm:mt-9 animate-fadeInUp delay-200">
-            <button
-              type="button"
-              onClick={scrollToBooking}
-              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-accent-primary px-8 text-sm font-semibold text-accent-contrast shadow-[0_12px_35px_rgba(215,183,93,0.22)] transition-all hover:-translate-y-0.5 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            >
-              Book a session
-              <ArrowDownwardIcon sx={{ fontSize: 18 }} />
-            </button>
-          </div>
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 mt-4 sm:mt-8 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/8 border border-white/15 mb-3 sm:mb-6 animate-fadeIn">
+          <TuneIcon sx={{ fontSize: 12 }} />
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-zinc-300 font-medium">
+            Private Fleet Concierge
+          </span>
+        </div>
+
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white leading-[1.08] sm:leading-[1.05] max-w-2xl animate-fadeInUp delay-100">
+          Sourced &amp;<br />
+          <span className="text-zinc-300">Delivered</span><br />
+          On Demand.
+        </h1>
+
+        <p className="mt-3 sm:mt-5 text-zinc-400 text-xs sm:text-sm md:text-base max-w-md leading-relaxed animate-fadeInUp delay-200">
+          Skip the listings. Whether you need a Ferrari for a gala, a Land Cruiser for executive protocol, or a Prado for interstate travel — our private desk sources everything directly on WhatsApp.
+        </p>
+
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 text-[11px] sm:text-xs text-zinc-400 animate-fadeInUp delay-200">
+          <span className="flex items-center gap-1">
+            <ShieldOutlinedIcon sx={{ fontSize: 13 }} />
+            Armed Escort Ready
+          </span>
+          <span>·</span>
+          <span className="flex items-center gap-1">
+            <DirectionsCarOutlinedIcon sx={{ fontSize: 13 }} />
+            Supercars to Daily Executive
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 mt-6 sm:mt-8 animate-fadeInUp delay-300">
+          <button
+            onClick={scrollToConsultation}
+            id="concierge-start-session"
+            className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg bg-accent-primary text-accent-contrast font-semibold text-xs sm:text-[13px] hover:bg-accent-hover transition-colors cursor-pointer"
+          >
+            Start Sourcing Session
+            <ArrowDownwardIcon sx={{ fontSize: 14 }} />
+          </button>
         </div>
       </div>
     </section>

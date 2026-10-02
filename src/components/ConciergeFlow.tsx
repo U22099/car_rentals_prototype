@@ -48,7 +48,7 @@ const BOOKING_REQUIREMENTS = [
 ];
 
 const BUDGET_TIERS = [
-  { id: "standard", title: "Standard", range: "70,000–180,000 / day", desc: "Indicative range for Hilux and Prado requests" },
+  { id: "standard", title: "Standard", range: "100,000–200,000 / day", desc: "Indicative range for Hilux and Prado requests" },
   { id: "executive", title: "Executive SUV", range: "200,000–450,000 / day", desc: "Indicative range for GX 460 and Land Cruiser requests" },
   { id: "premium", title: "Premium SUV", range: "600,000–1,200,000 / day", desc: "Indicative range for Lexus LX 600 requests" },
   { id: "group", title: "Group or custom quote", range: "Price confirmed on request", desc: "For Sprinter Bus, Coastal Bus, or a tailored request" },

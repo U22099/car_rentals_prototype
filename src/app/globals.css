@@ -4,37 +4,37 @@
   --font-playfair: "Georgia", "Times New Roman", serif;
   --font-inter: "Segoe UI", sans-serif;
 
-  /* Surface & Page Backgrounds */
-  --color-bg-primary: #0d0d0b;
-  --color-bg-secondary: #11110f;
-  --color-surface-card: #171715;
-  --color-surface-elevated: #211f1a;
-  --color-surface-interactive: #292720;
-  --color-surface-interactive-hover: #39352a;
+  /* Surface & Page Backgrounds — deep navy-black */
+  --color-bg-primary: #04080f;
+  --color-bg-secondary: #070d18;
+  --color-surface-card: #0d1624;
+  --color-surface-elevated: #111e30;
+  --color-surface-interactive: #162338;
+  --color-surface-interactive-hover: #1e2f48;
 
   /* Glass Effects */
-  --color-glass: rgba(255, 255, 255, 0.04);
-  --color-glass-dark: rgba(13, 13, 11, 0.94);
+  --color-glass: rgba(26, 127, 212, 0.05);
+  --color-glass-dark: rgba(4, 8, 15, 0.94);
 
   /* Border Colors */
   --color-border-subtle: rgba(255, 255, 255, 0.06);
   --color-border-light: rgba(255, 255, 255, 0.1);
-  --color-border-default: #35332c;
-  --color-border-muted: #4a473d;
-  --color-border-hover: #b4913a;
+  --color-border-default: #1a2d45;
+  --color-border-muted: #243d5a;
+  --color-border-hover: #1a8fff;
 
   /* Typography / Text Colors */
   --color-text-primary: #ffffff;
-  --color-text-body: #eeece5;
-  --color-text-secondary: #c4c0b5;
-  --color-text-muted: #a09b8f;
-  --color-text-dim: #817b6f;
-  --color-text-disabled: #58554e;
+  --color-text-body: #e8edf5;
+  --color-text-secondary: #b0bfd4;
+  --color-text-muted: #7a94b5;
+  --color-text-dim: #4f6a8a;
+  --color-text-disabled: #2d4260;
 
-  /* Accent & Action Colors */
-  --color-accent-primary: #d7b75d;
-  --color-accent-contrast: #11100d;
-  --color-accent-hover: #e8cf83;
+  /* Accent & Action Colors — vivid blue from logo */
+  --color-accent-primary: #1a8fff;
+  --color-accent-contrast: #020a14;
+  --color-accent-hover: #5abaff;
 
   /* Brand / WhatsApp */
   --color-brand-whatsapp: #25d366;
@@ -43,25 +43,26 @@
   --color-brand-whatsapp-border: rgba(37, 211, 102, 0.25);
   --color-brand-whatsapp-glow: rgba(37, 211, 102, 0.35);
 
-  /* Brand Logo Accent */
-  --color-logo-stroke: #d7b75d;
-  --color-logo-fill: rgba(215, 183, 93, 0.1);
+  /* Brand Logo Accent — blue */
+  --color-logo-stroke: #1a8fff;
+  --color-logo-fill: rgba(26, 143, 255, 0.1);
   --radius-control: 14px;
   --radius-card: 20px;
 
   /* Zinc Palette Scale */
-  --color-zinc-950: #09090b;
-  --color-zinc-900: #111113;
-  --color-zinc-850: #18181b;
-  --color-zinc-800: #282722;
-  --color-zinc-700: #403e36;
-  --color-zinc-600: #5a574d;
-  --color-zinc-500: #71717a;
-  --color-zinc-400: #a1a1aa;
-  --color-zinc-300: #d4d4d8;
-  --color-zinc-200: #e4e4e7;
-  --color-zinc-100: #f4f4f5;
+  --color-zinc-950: #04080f;
+  --color-zinc-900: #070d18;
+  --color-zinc-850: #0d1624;
+  --color-zinc-800: #111e30;
+  --color-zinc-700: #1a2d45;
+  --color-zinc-600: #243d5a;
+  --color-zinc-500: #4f6a8a;
+  --color-zinc-400: #7a94b5;
+  --color-zinc-300: #b0bfd4;
+  --color-zinc-200: #d8e2f0;
+  --color-zinc-100: #f0f4fa;
 }
+
 
 @theme {
   --color-bg-primary: var(--color-bg-primary);

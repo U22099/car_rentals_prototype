@@ -12,7 +12,6 @@ import PeopleIcon from "@mui/icons-material/People";
 import PlaceIcon from "@mui/icons-material/Place";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Calendar from "./Calendar";
-import TikTokIcon from "./TikTokIcon";
 import { rentalFleet } from "@/lib/fleet";
 import { brand } from "@/lib/properties";
 
@@ -30,12 +29,13 @@ interface DateRange {
 }
 
 const TRIP_PURPOSES = [
-  "Business or daily travel",
+  "Wedding / Special event",
   "Airport pickup or drop-off",
-  "Wedding or special event",
-  "Family or leisure trip",
-  "Inter-state journey",
-  "Group or corporate transport",
+  "Corporate / Business transport",
+  "Private movement",
+  "Hourly hire",
+  "Full day hire",
+  "Auto sales enquiry",
   "Other",
 ];
 
@@ -43,15 +43,16 @@ const BOOKING_REQUIREMENTS = [
   { id: "airport", title: "Airport pickup or drop-off", icon: PlaceIcon },
   { id: "multiple_stops", title: "Multiple stops", icon: PlaceIcon },
   { id: "luggage", title: "Extra luggage or equipment", icon: LocalShippingIcon },
-  { id: "long_distance", title: "Long-distance travel", icon: DirectionsCarFilledIcon },
+  { id: "long_distance", title: "Long-distance / inter-state travel", icon: DirectionsCarFilledIcon },
   { id: "child_seat", title: "Child seat required", icon: PeopleIcon },
+  { id: "security", title: "Security / armed escort required", icon: PeopleIcon },
 ];
 
 const BUDGET_TIERS = [
-  { id: "standard", title: "Standard", range: "100,000–200,000 / day", desc: "Indicative range for Hilux and Prado requests" },
-  { id: "executive", title: "Executive SUV", range: "200,000–450,000 / day", desc: "Indicative range for GX 460 and Land Cruiser requests" },
-  { id: "premium", title: "Premium SUV", range: "600,000–1,200,000 / day", desc: "Indicative range for Lexus LX 600 requests" },
-  { id: "group", title: "Group or custom quote", range: "Price confirmed on request", desc: "For Sprinter Bus, Coastal Bus, or a tailored request" },
+  { id: "standard", title: "Standard", range: "100,000–200,000 / day", desc: "Indicative range for Hilux, Sienna and Prado requests" },
+  { id: "executive", title: "Executive", range: "200,000–450,000 / day", desc: "Indicative range for Land Cruiser and Mercedes Benz requests" },
+  { id: "premium", title: "Premium / Luxury", range: "600,000–1,200,000 / day", desc: "Indicative range for Range Rover, G-Wagon, Lexus and Bulletproof requests" },
+  { id: "group", title: "Group or custom quote", range: "Price confirmed on request", desc: "For Coaster Bus, Hiace Bus, Sprinter Bus or tailored fleet requests" },
 ];
 
 const DURATION_PRESETS = [
@@ -135,6 +136,7 @@ export default function ConciergeFlow({
       `*Driving preference:* ${drivingPreference === "chauffeur" ? "Chauffeur requested" : "Self-drive requested"}`,
       `*Passengers:* ${passengers}`,
       `*Budget guide:* ${selectedBudgetObj?.title} (${budget}) — indicative only`,
+      `*Vehicle Image:* ${selectedVehicle?.image?.startsWith("/") ? `${process.env.NEXT_PUBLIC_BASE_URL}${selectedVehicle.image}` : selectedVehicle?.image ?? ""}`,
       "*Additional requirements:*",
       requirements,
       ...(customNotes.trim() ? ["", `*Notes:* ${customNotes.trim()}`] : []),
@@ -149,7 +151,7 @@ export default function ConciergeFlow({
   return (
     <section id="booking" className="w-full max-w-5xl mx-auto px-4 sm:px-8 py-16 sm:py-20 scroll-mt-20">
       <div className="mb-8 sm:mb-10">
-        <p className="text-[11px] tracking-[0.22em] uppercase text-[#d7b75d] font-semibold mb-3">Book with Landpeace</p>
+        <p className="text-[11px] tracking-[0.22em] uppercase text-[#1a8fff] font-semibold mb-3">Book with DOUBLE I.TANZE</p>
         <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">Tell us about your trip.</h2>
         <p className="text-zinc-400 text-sm max-w-xl mt-2 leading-relaxed">
           Share a few details and send your request directly to our WhatsApp team. Availability and final pricing are confirmed with you.
@@ -158,16 +160,16 @@ export default function ConciergeFlow({
         <div className="mt-7" aria-label={`Step ${step} of ${totalSteps}`}>
           <div className="grid grid-cols-6 gap-1.5" aria-hidden="true">
             {stepLabels.map((label, index) => (
-              <div key={label} className={`h-1 transition-colors duration-300 ${step >= index + 1 ? "bg-[#d7b75d]" : "bg-white/15"}`} />
+              <div key={label} className={`h-1 transition-colors duration-300 ${step >= index + 1 ? "bg-[#1a8fff]" : "bg-white/15"}`} />
             ))}
           </div>
           <div className="grid grid-cols-6 gap-1 mt-2 text-center text-[8px] min-[400px]:text-[9px] uppercase tracking-wide text-zinc-500">
-            {stepLabels.map((label, index) => <span key={label} className={step === index + 1 ? "text-[#e2c56e]" : ""}>{label}</span>)}
+            {stepLabels.map((label, index) => <span key={label} className={step === index + 1 ? "text-[#5abaff]" : ""}>{label}</span>)}
           </div>
         </div>
       </div>
 
-      <div className="rounded-3xl bg-[#171715] border border-white/10 p-4 sm:p-8 lg:p-10 shadow-[0_22px_80px_rgba(0,0,0,0.24)]">
+      <div className="rounded-3xl bg-[#0d1624] border border-white/10 p-4 sm:p-8 lg:p-10 shadow-[0_22px_80px_rgba(0,0,0,0.35)]">
         {step === 1 && (
           <div className="space-y-6 animate-fadeIn">
             <div>
@@ -184,14 +186,14 @@ export default function ConciergeFlow({
                     type="button"
                     onClick={() => { onVehicleSelect(vehicle.id); setSelectedBudget(vehicle.budgetId); }}
                     aria-pressed={isSelected}
-                    className={`flex min-h-[68px] items-center gap-3 rounded-xl p-3 border text-left transition-colors ${isSelected ? "border-[#d7b75d] bg-[#29251b]" : "border-zinc-700 bg-zinc-800 hover:border-[#d7b75d]/70"}`}
+                    className={`flex min-h-[68px] items-center gap-3 rounded-xl p-3 border text-left transition-colors ${isSelected ? "border-[#1a8fff] bg-[#0d1e38]" : "border-zinc-700/50 bg-[#111e30] hover:border-[#1a8fff]/70"}`}
                   >
-                    <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-black/25 text-[#d7b75d]"><VehicleIcon sx={{ fontSize: 22 }} /></span>
+                    <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-black/25 text-[#1a8fff]"><VehicleIcon sx={{ fontSize: 22 }} /></span>
                     <span className="min-w-0 flex-1">
                       <span className="block text-white text-sm font-semibold">{vehicle.name}</span>
                       <span className="block text-zinc-400 text-xs mt-1">{vehicle.type}</span>
                     </span>
-                    {isSelected && <CheckCircleIcon sx={{ fontSize: 19, color: "#d7b75d" }} />}
+                    {isSelected && <CheckCircleIcon sx={{ fontSize: 19, color: "#1a8fff" }} />}
                   </button>
                 );
               })}
@@ -210,9 +212,9 @@ export default function ConciergeFlow({
                 const isSelected = selectedOccasion === purpose;
                 return (
                   <button key={purpose} type="button" onClick={() => setSelectedOccasion(purpose)} aria-pressed={isSelected}
-                    className={`flex min-h-12 items-center justify-between gap-3 p-4 border text-left text-sm transition-colors ${isSelected ? "border-[#d7b75d] bg-[#29251b] text-white" : "border-zinc-700 bg-zinc-800 text-zinc-300 hover:border-zinc-500"}`}>
+                    className={`flex min-h-12 items-center justify-between gap-3 p-4 border text-left text-sm transition-colors ${isSelected ? "border-[#1a8fff] bg-[#0d1e38] text-white" : "border-zinc-700/50 bg-[#111e30] text-zinc-300 hover:border-zinc-500"}`}>
                     <span>{purpose}</span>
-                    {isSelected && <CheckCircleIcon sx={{ fontSize: 18, color: "#d7b75d" }} />}
+                    {isSelected && <CheckCircleIcon sx={{ fontSize: 18, color: "#1a8fff" }} />}
                   </button>
                 );
               })}
@@ -236,7 +238,7 @@ export default function ConciergeFlow({
                     setDateRange({ checkIn: null, checkOut: null });
                     setShowCalendar(false);
                   }} aria-pressed={isSelected}
-                    className={`min-h-11 px-3 border text-sm font-medium transition-colors ${isSelected ? "border-[#d7b75d] bg-[#29251b] text-white" : "border-zinc-700 bg-zinc-800 text-zinc-300 hover:border-zinc-500"}`}>
+                    className={`min-h-11 px-3 border text-sm font-medium transition-colors ${isSelected ? "border-[#1a8fff] bg-[#0d1e38] text-white" : "border-zinc-700/50 bg-[#111e30] text-zinc-300 hover:border-zinc-500"}`}>
                     {preset.label}
                   </button>;
                 })}
@@ -245,22 +247,22 @@ export default function ConciergeFlow({
 
             <div>
               <button type="button" onClick={() => setShowCalendar((shown) => !shown)} aria-expanded={showCalendar}
-                className="flex min-h-12 w-full items-center justify-between gap-3 p-3.5 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 text-left transition-colors">
+                className="flex min-h-12 w-full items-center justify-between gap-3 p-3.5 bg-[#111e30] border border-zinc-700/50 hover:border-zinc-500 text-left transition-colors">
                 <span className="flex min-w-0 items-center gap-2.5">
-                  <CalendarMonthIcon sx={{ fontSize: 19, color: "#d7b75d" }} />
+                  <CalendarMonthIcon sx={{ fontSize: 19, color: "#1a8fff" }} />
                   <span className="truncate text-zinc-200 text-sm font-medium">{dateRange.checkIn && dateRange.checkOut ? `${formatDate(dateRange.checkIn)} to ${formatDate(dateRange.checkOut)} (${days} days)` : "Choose exact dates (optional)"}</span>
                 </span>
-                <span className="shrink-0 text-xs text-[#e2c56e] font-medium">{showCalendar ? "Hide" : "Choose"}</span>
+                <span className="shrink-0 text-xs text-[#5abaff] font-medium">{showCalendar ? "Hide" : "Choose"}</span>
               </button>
-              {showCalendar && <div className="mt-3 p-3 sm:p-4 bg-zinc-800 border border-zinc-700 animate-fadeIn"><Calendar value={dateRange} onChange={setDateRange} /></div>}
+              {showCalendar && <div className="mt-3 p-3 sm:p-4 bg-[#111e30] border border-zinc-700/50 animate-fadeIn"><Calendar value={dateRange} onChange={setDateRange} /></div>}
             </div>
 
             <div>
               <label htmlFor="pickup-location" className="block text-zinc-300 text-xs uppercase tracking-wider font-semibold mb-2">Pickup and destination</label>
               <div className="relative">
-                <PlaceIcon sx={{ fontSize: 18, color: "#d7b75d" }} className="absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <PlaceIcon sx={{ fontSize: 18, color: "#1a8fff" }} className="absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input id="pickup-location" type="text" value={locationPreference} onChange={(event) => setLocationPreference(event.target.value)} placeholder="Enter your pickup area and destination"
-                  className="min-h-12 w-full pl-10 pr-4 py-3 bg-zinc-800 border border-zinc-700 text-white text-sm placeholder:text-zinc-500 focus:border-[#d7b75d] focus:outline-none" />
+                  className="min-h-12 w-full pl-10 pr-4 py-3 bg-[#111e30] border border-zinc-700/50 text-white text-sm placeholder:text-zinc-500 focus:border-[#1a8fff] focus:outline-none" />
               </div>
             </div>
           </div>
@@ -280,19 +282,19 @@ export default function ConciergeFlow({
                 const isSelected = drivingPreference === option.id;
                 const OptionIcon = option.icon;
                 return <button key={option.id} type="button" onClick={() => setDrivingPreference(option.id)} aria-pressed={isSelected}
-                  className={`min-h-32 p-4 border text-left transition-colors ${isSelected ? "border-[#d7b75d] bg-[#29251b]" : "border-zinc-700 bg-zinc-800 hover:border-zinc-500"}`}>
-                  <span className="flex items-center justify-between"><OptionIcon sx={{ fontSize: 22, color: "#d7b75d" }} />{isSelected && <CheckCircleIcon sx={{ fontSize: 18, color: "#d7b75d" }} />}</span>
+                  className={`min-h-32 p-4 border text-left transition-colors ${isSelected ? "border-[#1a8fff] bg-[#0d1e38]" : "border-zinc-700/50 bg-[#111e30] hover:border-zinc-500"}`}>
+                  <span className="flex items-center justify-between"><OptionIcon sx={{ fontSize: 22, color: "#1a8fff" }} />{isSelected && <CheckCircleIcon sx={{ fontSize: 18, color: "#1a8fff" }} />}</span>
                   <span className="block text-white text-sm font-semibold mt-3">{option.title}</span>
                   <span className="block text-zinc-400 text-xs mt-1">{option.detail}</span>
                 </button>;
               })}
             </div>
-            <div className="flex items-center justify-between gap-4 rounded-2xl p-4 bg-zinc-800 border border-zinc-700">
+            <div className="flex items-center justify-between gap-4 rounded-2xl p-4 bg-[#111e30] border border-zinc-700/50">
               <div><p className="text-white text-sm font-medium">How many passengers?</p><p className="text-zinc-500 text-xs mt-1">An estimate is fine.</p></div>
               <div className="flex items-center gap-3">
-                <button type="button" onClick={() => setPassengers((count) => Math.max(1, count - 1))} aria-label="Remove one passenger" className="grid size-11 place-items-center bg-zinc-700 text-white hover:bg-zinc-600">−</button>
+                <button type="button" onClick={() => setPassengers((count) => Math.max(1, count - 1))} aria-label="Remove one passenger" className="grid size-11 place-items-center bg-[#1a2d45] text-white hover:bg-[#1a8fff]/30">−</button>
                 <span className="w-6 text-center text-white font-semibold tabular-nums" aria-live="polite">{passengers}</span>
-                <button type="button" onClick={() => setPassengers((count) => Math.min(60, count + 1))} aria-label="Add one passenger" className="grid size-11 place-items-center bg-zinc-700 text-white hover:bg-zinc-600">+</button>
+                <button type="button" onClick={() => setPassengers((count) => Math.min(60, count + 1))} aria-label="Add one passenger" className="grid size-11 place-items-center bg-[#1a2d45] text-white hover:bg-[#1a8fff]/30">+</button>
               </div>
             </div>
           </div>
@@ -309,17 +311,17 @@ export default function ConciergeFlow({
                 const RequirementIcon = requirement.icon;
                 const isSelected = selectedServices.includes(requirement.id);
                 return <button key={requirement.id} type="button" onClick={() => toggleService(requirement.id)} aria-pressed={isSelected}
-                  className={`flex min-h-12 items-center gap-3 p-3.5 border text-left transition-colors ${isSelected ? "border-[#d7b75d] bg-[#29251b]" : "border-zinc-700 bg-zinc-800 hover:border-zinc-500"}`}>
-                  <RequirementIcon sx={{ fontSize: 19, color: "#d7b75d" }} />
+                  className={`flex min-h-12 items-center gap-3 p-3.5 border text-left transition-colors ${isSelected ? "border-[#1a8fff] bg-[#0d1e38]" : "border-zinc-700/50 bg-[#111e30] hover:border-zinc-500"}`}>
+                  <RequirementIcon sx={{ fontSize: 19, color: "#1a8fff" }} />
                   <span className="flex-1 text-zinc-200 text-sm">{requirement.title}</span>
-                  {isSelected && <CheckCircleIcon sx={{ fontSize: 17, color: "#d7b75d" }} />}
+                  {isSelected && <CheckCircleIcon sx={{ fontSize: 17, color: "#1a8fff" }} />}
                 </button>;
               })}
             </div>
             <div>
               <label htmlFor="booking-notes" className="block text-zinc-300 text-xs uppercase tracking-wider font-semibold mb-2">Notes for the team <span className="text-zinc-500 normal-case">(optional)</span></label>
               <textarea id="booking-notes" value={customNotes} onChange={(event) => setCustomNotes(event.target.value)} rows={3} placeholder="Share timing, route, luggage, or other details"
-                className="min-h-24 w-full resize-y px-4 py-3 bg-zinc-800 border border-zinc-700 text-white text-sm placeholder:text-zinc-500 focus:border-[#d7b75d] focus:outline-none" />
+                className="min-h-24 w-full resize-y px-4 py-3 bg-[#111e30] border border-zinc-700/50 text-white text-sm placeholder:text-zinc-500 focus:border-[#1a8fff] focus:outline-none" />
             </div>
           </div>
         )}
@@ -335,9 +337,9 @@ export default function ConciergeFlow({
                 const isSelected = selectedBudget === tier.id;
                 const range = tier.range === "Price confirmed on request" ? tier.range : `${currency}${tier.range}`;
                 return <button key={tier.id} type="button" onClick={() => setSelectedBudget(tier.id)} aria-pressed={isSelected}
-                  className={`min-h-[108px] p-4 border text-left transition-colors ${isSelected ? "border-[#d7b75d] bg-[#29251b]" : "border-zinc-700 bg-zinc-800 hover:border-zinc-500"}`}>
-                  <span className="flex items-center justify-between gap-2"><span className="text-white font-semibold text-sm">{tier.title}</span>{isSelected && <CheckCircleIcon sx={{ fontSize: 17, color: "#d7b75d" }} />}</span>
-                  <span className="block text-[#e2c56e] font-semibold text-sm mt-2">{range}</span>
+                  className={`min-h-[108px] p-4 border text-left transition-colors ${isSelected ? "border-[#1a8fff] bg-[#0d1e38]" : "border-zinc-700/50 bg-[#111e30] hover:border-zinc-500"}`}>
+                  <span className="flex items-center justify-between gap-2"><span className="text-white font-semibold text-sm">{tier.title}</span>{isSelected && <CheckCircleIcon sx={{ fontSize: 17, color: "#1a8fff" }} />}</span>
+                  <span className="block text-[#5abaff] font-semibold text-sm mt-2">{range}</span>
                   <span className="block text-zinc-500 text-xs mt-1">{tier.desc}</span>
                 </button>;
               })}
@@ -346,12 +348,12 @@ export default function ConciergeFlow({
               <div>
                 <label htmlFor="client-name" className="block text-zinc-300 text-xs uppercase tracking-wider font-semibold mb-2">Your name</label>
                 <input id="client-name" type="text" autoComplete="name" value={clientName} onChange={(event) => setClientName(event.target.value)} placeholder="Full name"
-                  className="min-h-12 w-full px-4 py-3 bg-zinc-800 border border-zinc-700 text-white text-sm placeholder:text-zinc-500 focus:border-[#d7b75d] focus:outline-none" />
+                  className="min-h-12 w-full px-4 py-3 bg-[#111e30] border border-zinc-700/50 text-white text-sm placeholder:text-zinc-500 focus:border-[#1a8fff] focus:outline-none" />
               </div>
               <div>
                 <label htmlFor="client-phone" className="block text-zinc-300 text-xs uppercase tracking-wider font-semibold mb-2">Your contact number</label>
                 <input id="client-phone" type="tel" inputMode="tel" autoComplete="tel" value={clientPhone} onChange={(event) => setClientPhone(event.target.value)} placeholder="e.g. 0801 234 5678"
-                  className="min-h-12 w-full px-4 py-3 bg-zinc-800 border border-zinc-700 text-white text-sm placeholder:text-zinc-500 focus:border-[#d7b75d] focus:outline-none" />
+                  className="min-h-12 w-full px-4 py-3 bg-[#111e30] border border-zinc-700/50 text-white text-sm placeholder:text-zinc-500 focus:border-[#1a8fff] focus:outline-none" />
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 rounded-2xl p-4 bg-black/20 border border-white/10 text-xs">
@@ -360,29 +362,29 @@ export default function ConciergeFlow({
               <div><span className="block text-zinc-500 uppercase text-[10px]">Duration</span><span className="block text-white font-semibold mt-1">About {days} day{days === 1 ? "" : "s"}</span></div>
               <div><span className="block text-zinc-500 uppercase text-[10px]">Passengers</span><span className="block text-white font-semibold mt-1">{passengers}</span></div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-zinc-900/90 via-zinc-800/60 to-zinc-900/90 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="rounded-2xl border border-[#1a8fff]/20 bg-gradient-to-r from-[#0d1e38]/90 via-[#111e30]/60 to-[#0d1e38]/90 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3.5">
-                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-black/40 border border-[#d7b75d]/40 text-[#e2c56e]">
-                  <TikTokIcon className="size-5" />
+                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-black/40 border border-[#1a8fff]/40 text-[#5abaff]">
+                  <WhatsAppIcon sx={{ fontSize: 22 }} />
                 </div>
                 <div>
                   <p className="text-white text-sm font-semibold flex items-center gap-2">
-                    See our fleet in action on TikTok
-                    <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#d7b75d]/20 text-[#e2c56e] border border-[#d7b75d]/30">Live Videos</span>
+                    Reach us directly on WhatsApp
+                    <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#1a8fff]/20 text-[#5abaff] border border-[#1a8fff]/30">2 Lines</span>
                   </p>
                   <p className="text-zinc-400 text-xs mt-0.5">
-                    Watch walkthroughs of our luxury SUVs &amp; buses at <span className="text-[#e2c56e] font-medium">{brand.socials.tiktok.handle}</span>
+                    +{brand.phone} &nbsp;|&nbsp; +{brand.phone2}
                   </p>
                 </div>
               </div>
               <a
-                href={brand.socials.tiktok.url}
+                href={`https://wa.me/${brand.phone}?text=${encodeURIComponent(`Hello ${brand.name}, I would like to enquire about vehicle hire.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-10 items-center justify-center gap-2 px-4 rounded-full border border-white/20 bg-white/5 hover:border-[#d7b75d] hover:bg-[#d7b75d]/10 hover:text-[#e2c56e] text-zinc-200 text-xs font-semibold transition-all shrink-0 self-start sm:self-center"
+                className="inline-flex min-h-10 items-center justify-center gap-2 px-4 rounded-full border border-[#1a8fff]/30 bg-[#1a8fff]/10 hover:border-[#1a8fff] hover:bg-[#1a8fff]/20 hover:text-[#5abaff] text-zinc-200 text-xs font-semibold transition-all shrink-0 self-start sm:self-center"
               >
-                <TikTokIcon className="size-3.5 text-[#e2c56e]" />
-                <span>View on TikTok</span>
+                <WhatsAppIcon sx={{ fontSize: 14 }} />
+                <span>Open WhatsApp</span>
               </a>
             </div>
 
@@ -393,8 +395,8 @@ export default function ConciergeFlow({
           </div>
         )}
 
-        <div className="sticky bottom-0 z-20 -mx-4 -mb-4 mt-7 flex items-center justify-between gap-4 rounded-b-3xl border-t border-white/10 bg-[#171715]/95 px-4 pt-4 pb-4 backdrop-blur-md sm:-mx-8 sm:-mb-8 sm:px-8 lg:-mx-10 lg:-mb-10 lg:px-10">
-          {step > 1 ? <button type="button" onClick={() => goToStep(step - 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 text-xs font-semibold uppercase tracking-wider"><ArrowBackIcon sx={{ fontSize: 16 }} />Back</button> : <span />}
+        <div className="sticky bottom-0 z-20 -mx-4 -mb-4 mt-7 flex items-center justify-between gap-4 rounded-b-3xl border-t border-white/10 bg-[#0d1624]/95 px-4 pt-4 pb-4 backdrop-blur-md sm:-mx-8 sm:-mb-8 sm:px-8 lg:-mx-10 lg:-mb-10 lg:px-10">
+          {step > 1 ? <button type="button" onClick={() => goToStep(step - 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 border border-zinc-700/50 text-zinc-300 hover:text-white hover:border-zinc-500 text-xs font-semibold uppercase tracking-wider"><ArrowBackIcon sx={{ fontSize: 16 }} />Back</button> : <span />}
           {step < totalSteps && <button type="button" onClick={() => goToStep(step + 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-6 bg-accent-primary text-accent-contrast hover:bg-accent-hover text-xs font-bold uppercase tracking-wider transition-colors">Continue<ArrowForwardIcon sx={{ fontSize: 16 }} /></button>}
         </div>
       </div>

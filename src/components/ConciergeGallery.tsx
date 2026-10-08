@@ -5,6 +5,7 @@ import Image from "next/image";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
+import ShieldIcon from "@mui/icons-material/Shield";
 import { rentalFleet } from "@/lib/fleet";
 
 interface ConciergeGalleryProps {
@@ -27,15 +28,15 @@ export default function ConciergeGallery({
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
           <div>
-            <p className="text-[11px] tracking-[0.22em] uppercase text-[#d7b75d] font-semibold mb-2">
-              Find your fit
+            <p className="text-[11px] tracking-[0.22em] uppercase text-[#1a8fff] font-semibold mb-2">
+              Our vehicles
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold text-white leading-tight">
-              The Landpeace fleet
+              The DOUBLE I.TANZE fleet
             </h2>
           </div>
           <p className="text-zinc-400 text-sm max-w-sm leading-relaxed">
-            Choose a vehicle to start your request. Final availability and rates are confirmed with our team.
+            From executive SUVs to armoured vehicles and group transport — choose your vehicle and send a request directly on WhatsApp.
           </p>
         </div>
 
@@ -44,7 +45,9 @@ export default function ConciergeGallery({
             const isSelected = selectedVehicleId === vehicle.id;
             const imageSrc = vehicle.image ?? "";
             const showImage = Boolean(imageSrc) && !failedImages.includes(vehicle.id);
-            const VehicleIcon = vehicle.name.includes("Bus")
+            const VehicleIcon = vehicle.id === "bulletproof"
+              ? ShieldIcon
+              : vehicle.type.toLowerCase().includes("bus") || vehicle.type.toLowerCase().includes("transport")
               ? AirportShuttleIcon
               : DirectionsCarFilledIcon;
 
@@ -54,13 +57,13 @@ export default function ConciergeGallery({
                 type="button"
                 onClick={() => handleSelect(vehicle.id)}
                 aria-pressed={isSelected}
-                className={`group min-w-0 overflow-hidden rounded-2xl border text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e2c56e] ${
+                className={`group min-w-0 overflow-hidden rounded-2xl border text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1a8fff] ${
                   isSelected
-                    ? "border-[#d7b75d] bg-[#211e16]"
-                    : "border-white/10 bg-[#171715] hover:border-[#d7b75d]/70"
+                    ? "border-[#1a8fff] bg-[#0d1e38]"
+                    : "border-white/10 bg-[#0d1624] hover:border-[#1a8fff]/70"
                 }`}
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#22211d]">
+                <div className="relative aspect-[16/10] overflow-hidden bg-[#0d1a2e]">
                   {showImage && imageSrc ? (
                     <Image
                       src={imageSrc}
@@ -71,9 +74,9 @@ export default function ConciergeGallery({
                       onError={() => setFailedImages((current) => [...current, vehicle.id])}
                     />
                   ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[repeating-linear-gradient(135deg,#27251f_0px,#27251f_1px,#1a1915_1px,#1a1915_15px)] text-[#d7b75d]">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[repeating-linear-gradient(135deg,#0d1e38_0px,#0d1e38_1px,#070f1e_1px,#070f1e_15px)] text-[#1a8fff]">
                       <VehicleIcon sx={{ fontSize: 42 }} />
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-300">
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400">
                         {vehicle.type}
                       </span>
                     </div>
@@ -98,10 +101,10 @@ export default function ConciergeGallery({
                     </div>
                     <ArrowOutwardIcon
                       sx={{ fontSize: 19 }}
-                      className="shrink-0 text-[#d7b75d] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="shrink-0 text-[#1a8fff] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     />
                   </div>
-                  <span className="inline-block text-[11px] text-[#e2c56e] mt-4 font-medium">
+                  <span className="inline-block text-[11px] text-[#5abaff] mt-4 font-medium">
                     {isSelected ? "Selected for your request" : "Request this vehicle"}
                   </span>
                 </div>

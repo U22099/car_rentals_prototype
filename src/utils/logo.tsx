@@ -11,7 +11,7 @@ export default function Logo({ size = 44 }: LogoProps) {
       style={{ width: size, height: size }}
     >
       <Image
-        src="/IMG-20260929-WA0023.jpg"
+        src="/logo.jpg"
         alt="Landpeace Logistics logo"
         width={size}
         height={size}

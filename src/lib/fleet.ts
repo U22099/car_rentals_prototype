@@ -54,7 +54,7 @@ export const rentalFleet: RentalVehicle[] = [
     id: "lexus",
     name: "Lexus",
     type: "Luxury SUV",
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1200&q=85&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1664427321044-b4057f77777e?w=1200&q=85&auto=format&fit=crop",
     imageNote: "Representative image",
     budgetId: "premium",
   },

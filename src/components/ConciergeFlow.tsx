@@ -49,9 +49,9 @@ const BOOKING_REQUIREMENTS = [
 ];
 
 const BUDGET_TIERS = [
-  { id: "standard", title: "Standard", range: "100,000–200,000 / day", desc: "Indicative range for Hilux, Sienna and Prado requests" },
-  { id: "executive", title: "Executive", range: "200,000–450,000 / day", desc: "Indicative range for Land Cruiser and Mercedes Benz requests" },
-  { id: "premium", title: "Premium / Luxury", range: "600,000–1,200,000 / day", desc: "Indicative range for Range Rover, G-Wagon, Lexus and Bulletproof requests" },
+  { id: "standard", title: "Standard", range: "150,000–250,000 / day", desc: "Indicative range for Hilux, Sienna and Prado requests" },
+  { id: "executive", title: "Executive", range: "500,000–700,000 / day", desc: "Indicative range for Land Cruiser and Mercedes Benz requests" },
+  { id: "premium", title: "Premium / Luxury", range: "1,500,000+ / day", desc: "Indicative range for Range Rover, G-Wagon, Lexus and Bulletproof requests" },
   { id: "group", title: "Group or custom quote", range: "Price confirmed on request", desc: "For Coaster Bus, Hiace Bus, Sprinter Bus or tailored fleet requests" },
 ];
 

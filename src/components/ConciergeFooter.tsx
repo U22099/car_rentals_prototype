@@ -10,6 +10,8 @@ import FlightIcon from "@mui/icons-material/Flight";
 import CelebrationIcon from "@mui/icons-material/Celebration";
 import StoreIcon from "@mui/icons-material/Store";
 import { brand } from "@/lib/properties";
+import TikTokIcon from "./TikTokIcon";
+import { Instagram, Facebook } from "@mui/icons-material";
 
 interface ConciergeFooterProps {
   brandName: string;
@@ -110,6 +112,32 @@ export default function ConciergeFooter({ brandName, phone }: ConciergeFooterPro
                 <WhatsAppIcon sx={{ fontSize: 16 }} />
                 WhatsApp — Line 2
               </a>
+              <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+                <a
+                  href={brand.socials.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+                >
+                  <TikTokIcon />
+                </a>
+                <a
+                  href={brand.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+                >
+                  <Instagram sx={{ fontSize: 24 }} />
+                </a>
+                <a
+                  href={brand.socials.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+                >
+                  <Facebook sx={{ fontSize: 24 }} />
+                </a>
+              </div>
               <div className="flex flex-col gap-1 mt-1">
                 <a href={`tel:+${phone}`} className="text-xs text-zinc-400 hover:text-[#5abaff] transition-colors flex items-center gap-1.5">
                   <PhoneIcon sx={{ fontSize: 12 }} /> +{phone}
@@ -118,6 +146,7 @@ export default function ConciergeFooter({ brandName, phone }: ConciergeFooterPro
                   <PhoneIcon sx={{ fontSize: 12 }} /> +{brand.phone2}
                 </a>
               </div>
+
             </div>
           </div>
         </div>

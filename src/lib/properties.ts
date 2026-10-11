@@ -4,6 +4,11 @@ export interface BrandProperties {
   phone: string;
   phone2: string;
   currency: string;
+  socials: {
+    instagram: string;
+    facebook: string;
+    tiktok: string;
+  }
 }
 
 export const brand: BrandProperties = {
@@ -12,4 +17,9 @@ export const brand: BrandProperties = {
   phone: "2348160221236",
   phone2: "2349158989731",
   currency: "₦",
+  socials: {
+    instagram: "https://www.instagram.com/doubleitanze",
+    facebook: "https://www.facebook.com/share/18NHNVFE8a/",
+    tiktok: "https://www.tiktok.com/@doubleitanze01"
+  }
 };

@@ -14,6 +14,8 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Calendar from "./Calendar";
 import { rentalFleet } from "@/lib/fleet";
 import { brand } from "@/lib/properties";
+import { Instagram, Facebook } from "@mui/icons-material";
+import TikTokIcon from "./TikTokIcon";
 
 interface ConciergeFlowProps {
   brandName: string;
@@ -362,42 +364,50 @@ export default function ConciergeFlow({
               <div><span className="block text-zinc-500 uppercase text-[10px]">Duration</span><span className="block text-white font-semibold mt-1">About {days} day{days === 1 ? "" : "s"}</span></div>
               <div><span className="block text-zinc-500 uppercase text-[10px]">Passengers</span><span className="block text-white font-semibold mt-1">{passengers}</span></div>
             </div>
-            <div className="rounded-2xl border border-[#1a8fff]/20 bg-gradient-to-r from-[#0d1e38]/90 via-[#111e30]/60 to-[#0d1e38]/90 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-black/40 border border-[#1a8fff]/40 text-[#5abaff]">
-                  <WhatsAppIcon sx={{ fontSize: 22 }} />
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold flex items-center gap-2">
-                    Reach us directly on WhatsApp
-                    <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#1a8fff]/20 text-[#5abaff] border border-[#1a8fff]/30">2 Lines</span>
-                  </p>
-                  <p className="text-zinc-400 text-xs mt-0.5">
-                    +{brand.phone} &nbsp;|&nbsp; +{brand.phone2}
-                  </p>
-                </div>
+            <div className="rounded-2xl border border-[#1a8fff]/20 bg-gradient-to-r from-[#0d1e38]/90 via-[#111e30]/60 to-[#0d1e38]/90 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h1 className="text-white text-base font-semibold flex items-center gap-2">
+                Reach us directly on our socials
+              </h1>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pt-3 sm:pt-0 sm:border-0 border-t border-white/10 w-full">
+                <a
+                  href={brand.socials.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 transition-colors w-full"
+                >
+                  <TikTokIcon />
+                  <span>TikTok</span>
+                </a>
+                <a
+                  href={brand.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 transition-colors w-full"
+                >
+                  <Instagram sx={{ fontSize: 24 }} />
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href={brand.socials.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-black text-white hover:bg-gray-800 transition-colors w-full"
+                >
+                  <Facebook sx={{ fontSize: 24 }} />
+                  <span>Facebook</span>
+                </a>
               </div>
-              <a
-                href={`https://wa.me/${brand.phone}?text=${encodeURIComponent(`Hello ${brand.name}, I would like to enquire about vehicle hire.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-10 items-center justify-center gap-2 px-4 rounded-full border border-[#1a8fff]/30 bg-[#1a8fff]/10 hover:border-[#1a8fff] hover:bg-[#1a8fff]/20 hover:text-[#5abaff] text-zinc-200 text-xs font-semibold transition-all shrink-0 self-start sm:self-center"
-              >
-                <WhatsAppIcon sx={{ fontSize: 14 }} />
-                <span>Open WhatsApp</span>
-              </a>
             </div>
-
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
-              className="flex min-h-14 w-full items-center justify-center gap-3 rounded-full px-4 bg-[#25d366] text-[#071b0e] font-bold text-sm sm:text-base hover:bg-[#49e384] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-              <WhatsAppIcon sx={{ fontSize: 22 }} />Send request on WhatsApp
-            </a>
           </div>
         )}
 
         <div className="sticky bottom-0 z-20 -mx-4 -mb-4 mt-7 flex items-center justify-between gap-4 rounded-b-3xl border-t border-white/10 bg-[#0d1624]/95 px-4 pt-4 pb-4 backdrop-blur-md sm:-mx-8 sm:-mb-8 sm:px-8 lg:-mx-10 lg:-mb-10 lg:px-10">
           {step > 1 ? <button type="button" onClick={() => goToStep(step - 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 border border-zinc-700/50 text-zinc-300 hover:text-white hover:border-zinc-500 text-xs font-semibold uppercase tracking-wider"><ArrowBackIcon sx={{ fontSize: 16 }} />Back</button> : <span />}
           {step < totalSteps && <button type="button" onClick={() => goToStep(step + 1)} className="inline-flex min-h-11 items-center gap-2 rounded-full px-6 bg-accent-primary text-accent-contrast hover:bg-accent-hover text-xs font-bold uppercase tracking-wider transition-colors">Continue<ArrowForwardIcon sx={{ fontSize: 16 }} /></button>}
+          {step === totalSteps && <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full px-6 bg-accent-primary text-accent-contrast hover:bg-accent-hover text-xs font-bold uppercase tracking-wider transition-colors">
+            <WhatsAppIcon sx={{ fontSize: 22 }} />Send
+          </a>}
         </div>
       </div>
     </section>

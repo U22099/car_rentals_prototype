@@ -13,6 +13,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Toyota Land Cruiser",
     type: "Full-size SUV",
     image: "/toyota_land_cruiser_300_1789978397588.jpg",
+    imageNote: "Representative image",
     budgetId: "executive",
   },
   {
@@ -20,6 +21,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Toyota Prado",
     type: "Executive SUV",
     image: "/toyota_prado_txl_1789978414377.jpg",
+    imageNote: "Representative image",
     budgetId: "standard",
   },
   {
@@ -27,6 +29,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Toyota Hilux",
     type: "Pickup Truck",
     image: "/toyota_hilux_1789978454695.jpg",
+    imageNote: "Representative image",
     budgetId: "standard",
   },
   {
@@ -34,6 +37,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Toyota Coaster Bus",
     type: "Group Transport",
     image: "/toyota_coaster_bus_1791486678493.jpg",
+    imageNote: "Representative image",
     budgetId: "group",
   },
   {
@@ -41,6 +45,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Toyota Hiace Bus",
     type: "Group Transport",
     image: "/toyoto_hiace.png",
+    imageNote: "Representative image",
     budgetId: "group",
   },
   {
@@ -48,6 +53,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Toyota Sienna",
     type: "Luxury Minivan",
     image: "https://images.unsplash.com/photo-1720545044233-d2ac77fa6030?w=1200&q=85&auto=format&fit=crop",
+    imageNote: "Representative image",
     budgetId: "standard",
   },
   {
@@ -63,6 +69,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Range Rover",
     type: "Premium SUV",
     image: "/range_rover.jpg",
+    imageNote: "Representative image",
     budgetId: "premium",
   },
   {
@@ -70,6 +77,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Mercedes G-Wagon",
     type: "Luxury SUV",
     image: "/mercedes_gwagon.jpg",
+    imageNote: "Representative image",
     budgetId: "premium",
   },
   {
@@ -77,6 +85,7 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Mercedes Benz",
     type: "Executive Sedan",
     image: "/mercedes_s_class.jpg",
+    imageNote: "Representative image",
     budgetId: "executive",
   },
   {
@@ -84,12 +93,14 @@ export const rentalFleet: RentalVehicle[] = [
     name: "Mercedes Sprinter Bus",
     type: "Group Transport",
     image: "/sprinter_bus.png",
+    imageNote: "Representative image",
     budgetId: "group",
   },
   {
     id: "bulletproof",
     name: "Bulletproof Vehicle / SUV",
     image: "/bulletproof_suv.jpeg",
+    imageNote: "Representative image",
     type: "Armoured SUV",
     budgetId: "premium",
   },

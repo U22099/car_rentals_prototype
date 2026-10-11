@@ -7,6 +7,8 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { brand } from "@/lib/properties";
 import Logo from "@/utils/logo";
+import TikTokIcon from "./TikTokIcon";
+import { Facebook, Instagram } from "@mui/icons-material";
 
 interface ConciergeHeaderProps {
   brandName: string;
@@ -15,8 +17,6 @@ interface ConciergeHeaderProps {
 
 export default function ConciergeHeader({ brandName, phone }: ConciergeHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(`Hello ${brand.name}, I would like to enquire about hiring a vehicle.`)}`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#04080f]/95 backdrop-blur-xl">
@@ -44,15 +44,31 @@ export default function ConciergeHeader({ brandName, phone }: ConciergeHeaderPro
 
         <div className="hidden md:flex items-center gap-2.5">
           <a
-            href={whatsappUrl}
+            href={brand.socials.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 px-4 rounded-full text-[12px] font-semibold bg-accent-primary text-accent-contrast hover:bg-accent-hover transition-colors"
+            className="grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
           >
-            <WhatsAppIcon sx={{ fontSize: 17 }} />
-            WhatsApp us
+            <TikTokIcon />
+          </a>
+          <a
+            href={brand.socials.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className= "grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+          >
+            <Instagram sx={{ fontSize: 24 }} />
+          </a>
+          <a
+            href={brand.socials.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className= "grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+          >
+            <Facebook sx={{ fontSize: 24 }} />
           </a>
         </div>
+
 
         <button
           className="md:hidden grid place-items-center size-11 shrink-0 text-zinc-200 hover:text-[#5abaff]"
@@ -75,16 +91,31 @@ export default function ConciergeHeader({ brandName, phone }: ConciergeHeaderPro
           <a href={`tel:+${phone}`} className="flex min-h-11 items-center gap-2 text-sm text-zinc-200 hover:text-[#5abaff]">
             <PhoneIcon sx={{ fontSize: 16 }} /> +{phone}
           </a>
-          <div className="pt-3 border-t border-white/10">
+          <div className="flex items-center gap-2 pt-3 border-t border-white/10">
             <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center gap-2 w-full px-4 rounded-full bg-accent-primary text-accent-contrast hover:bg-accent-hover font-semibold text-sm"
-            >
-              <WhatsAppIcon sx={{ fontSize: 18 }} />
-              Chat on WhatsApp
-            </a>
+            href={brand.socials.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+          >
+            <TikTokIcon />
+          </a>
+          <a
+            href={brand.socials.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className= "grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+          >
+            <Instagram sx={{ fontSize: 24 }} />
+          </a>
+          <a
+            href={brand.socials.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className= "grid place-items-center rounded-full size-11 bg-black text-white hover:bg-gray-800 transition-colors"
+          >
+            <Facebook sx={{ fontSize: 24 }} />
+          </a>
           </div>
         </div>
       )}

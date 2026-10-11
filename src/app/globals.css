@@ -117,6 +117,10 @@ button:not(.calendar-day) {
   touch-action: manipulation;
 }
 
+button {
+  cursor: pointer;
+}
+
 input,
 textarea {
   border-radius: 12px;

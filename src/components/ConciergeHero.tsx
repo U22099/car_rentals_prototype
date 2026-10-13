@@ -8,10 +8,9 @@ import TuneIcon from "@mui/icons-material/Tune";
 
 interface ConciergeHeroProps {
   brandName: string;
-  phone: string;
 }
 
-export default function ConciergeHero({ brandName, phone }: ConciergeHeroProps) {
+export default function ConciergeHero({ brandName }: ConciergeHeroProps) {
   const scrollToConsultation = () => {
     document.getElementById("consultation")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -24,8 +23,8 @@ export default function ConciergeHero({ brandName, phone }: ConciergeHeroProps) 
           alt="Luxury automotive fleet"
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/70 to-bg-primary/15" />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-bg-primary via-bg-primary/70 to-bg-primary/15" />
+        <div className="absolute inset-0 bg-linear-to-r from-bg-primary/60 to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto w-full">

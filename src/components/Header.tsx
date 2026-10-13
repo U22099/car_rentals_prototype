@@ -4,6 +4,7 @@ import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { Mail } from "@mui/icons-material";
 
 interface HeaderProps {
   brandName: string;
@@ -11,14 +12,20 @@ interface HeaderProps {
 
 export default function Header({ brandName }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const recipientEmail = "u22099dandev@gmail.com";
+  const subject = "Inquiry: Luxury Vehicle Reservation";
+  const body =
+    "Hello Apex Auto Team,\n\nI saw your listing on your website and would like to inquire about reserving a vehicle from your fleet.\n\nPlease let me know the availability and booking process.\n\nBest regards,";
 
-  const phone = "2349033572229";
-  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent("Hello! I would like to inquire about reserving a vehicle.")}`;
+  const mailUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="text-lg font-semibold tracking-wider text-white uppercase">
+        <a
+          href="/"
+          className="text-lg font-semibold tracking-wider text-white uppercase"
+        >
           {brandName}
         </a>
 
@@ -33,13 +40,13 @@ export default function Header({ brandName }: HeaderProps) {
 
         <div className="hidden md:flex items-center gap-3">
           <a
-            href={whatsappUrl}
+            href={mailUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium bg-accent-primary text-accent-contrast hover:bg-accent-hover transition-colors"
           >
-            <WhatsAppIcon sx={{ fontSize: 16 }} />
-            WhatsApp
+            <Mail sx={{ fontSize: 16 }} />
+            Email Us
           </a>
         </div>
 
@@ -70,13 +77,13 @@ export default function Header({ brandName }: HeaderProps) {
           </a>
           <div className="pt-2 border-t border-zinc-800">
             <a
-              href={whatsappUrl}
+              href={mailUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-accent-primary text-accent-contrast hover:bg-accent-hover font-medium text-xs uppercase tracking-wider"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium bg-accent-primary text-accent-contrast hover:bg-accent-hover transition-colors"
             >
-              <WhatsAppIcon sx={{ fontSize: 16 }} />
-              WhatsApp
+              <Mail sx={{ fontSize: 16 }} />
+              Email Us
             </a>
           </div>
         </div>

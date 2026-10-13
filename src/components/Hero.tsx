@@ -21,12 +21,12 @@ export default function Hero({ brandName, location }: HeroProps) {
           alt="Luxury automotive"
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/85 via-bg-primary/75 to-bg-primary" />
+        <div className="absolute inset-0 bg-linear-to-b from-bg-primary/85 via-bg-primary/75 to-bg-primary" />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto space-y-6">
         <p className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-medium">
-          {location} · Direct WhatsApp Booking
+          {location} · Reserve Fleet
         </p>
 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white leading-tight">
@@ -34,7 +34,8 @@ export default function Hero({ brandName, location }: HeroProps) {
         </h1>
 
         <p className="text-zinc-300 text-base sm:text-lg max-w-xl mx-auto font-normal leading-relaxed">
-          Pristine supercars, executive Land Cruisers, and everyday luxury road masters. Ready for Lagos, Abuja, and inter-state travel with optional vetted chauffeurs.
+          From exotic supercars to executive SUVs. Fully insured fleet, VIP
+          concierge delivery, and instant reservation confirmation.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">

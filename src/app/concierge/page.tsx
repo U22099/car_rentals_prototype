@@ -13,26 +13,24 @@ export const metadata: Metadata = {
 
 export default function ConciergePage() {
   const brandName = brand.name ?? "Apex Luxury Auto";
-  const phone = brand.phone ?? "2349033572229";
   const currency = brand.currency ?? "₦";
 
   return (
     <main className="min-h-screen bg-bg-primary flex flex-col text-text-body">
-      <ConciergeHeader brandName={brandName} phone={phone} />
+      <ConciergeHeader brandName={brandName}/>
 
-      <ConciergeHero brandName={brandName} phone={phone} />
+      <ConciergeHero brandName={brandName} />
 
       <ConciergeGallery />
 
       <div className="flex-1 flex items-center justify-center">
         <ConciergeFlow
           brandName={brandName}
-          phone={phone}
           currency={currency}
         />
       </div>
 
-      <ConciergeFooter brandName={brandName} phone={phone} />
+      <ConciergeFooter brandName={brandName} />
     </main>
   );
 }

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import EmailIcon from "@mui/icons-material/Email";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SpeedIcon from "@mui/icons-material/Speed";
 import SecurityIcon from "@mui/icons-material/Security";
@@ -20,7 +20,7 @@ import Calendar from "./Calendar";
 
 interface ConciergeFlowProps {
   brandName: string;
-  phone: string;
+  email?: string;
   currency: string;
 }
 
@@ -45,67 +45,67 @@ const VEHICLE_CATEGORIES = [
   {
     id: "suv",
     title: "Prestige & Armored SUV",
-    subtitle: "Land Cruiser 300, Range Rover SV, Escalade, G-Wagon",
+    subtitle: "Range Rover SV, Cadillac Escalade ESV, G-Wagon",
     icon: SecurityIcon,
   },
   {
     id: "daily_executive",
     title: "Executive & Daily Luxury",
-    subtitle: "Toyota Prado TXL, Lexus ES350, Mercedes E-Class, Camry",
+    subtitle: "Mercedes S-Class, BMW 7 Series, Audi A8",
     icon: DirectionsCarFilledIcon,
   },
   {
     id: "security_protocol",
     title: "Security Escort & Protocol",
-    subtitle: "Toyota Hilux Adventure, Armed Convoy, Bulletproof Option",
+    subtitle: "Bulletproof SUV Convoys & Close Protection Vehicles",
     icon: SecurityIcon,
   },
   {
     id: "delegation_van",
-    title: "VIP Delegation Van & Bus",
-    subtitle: "Toyota HiAce Executive VIP, Coaster Bus for Crews",
+    title: "VIP Delegation Sprinter",
+    subtitle: "Custom Executive Van & Luxury Shuttle for Crews",
     icon: AirportShuttleIcon,
   },
 ];
 
 const OCCASIONS = [
-  "Executive Business & Daily Errands",
+  "Executive Business & Corporate Travel",
   "VIP Airport Tarmac / FBO Arrival",
-  "Wedding & Entourage",
-  "Interstate Travel & Protocol Escort",
-  "Red Carpet, Gala & Video Shoot",
-  "Weekend Getaway & Road Trip",
+  "Wedding & VIP Entourage",
+  "Interstate / Touring Protocol Escort",
+  "Red Carpet, Gala & Media Shoot",
+  "Weekend Getaway & Track Day",
 ];
 
 const LUXURY_SERVICES = [
   {
     id: "executive_chauffeur",
     title: "Professional Executive Chauffeur",
-    desc: "Suited, vetted, knowledgeable about city shortcuts & protocol",
+    desc: "Suited, vetted, knowledgeable about city navigation & VIP protocol",
     icon: PeopleIcon,
   },
   {
     id: "armed_escort",
-    title: "Armed Security Detail / Chase Convoy",
-    desc: "MOPOL armed escort vehicle for high-security movements",
+    title: "Private Security Detail / Chase Convoy",
+    desc: "Trained tactical protection vehicles for high-security movements",
     icon: SecurityIcon,
   },
   {
     id: "tarmac_fbo",
     title: "Airport Tarmac / FBO Meet & Greet",
-    desc: "Airside vehicle handover at private aviation terminal",
+    desc: "Airside direct vehicle handover at private aviation terminal",
     icon: FlightTakeoffIcon,
   },
   {
     id: "enclosed_delivery",
     title: "White-Glove Flatbed Delivery",
-    desc: "Zero-mile enclosed truck delivery to residence or hotel",
+    desc: "Zero-mile enclosed truck delivery to private residence or hotel",
     icon: LocalShippingIcon,
   },
   {
     id: "champagne_refreshment",
     title: "In-Car Refreshments & Champagne",
-    desc: "Chilled drinks, mints, wet towels, and bottled beverages",
+    desc: "Chilled vintage beverages, mints, and custom refreshments",
     icon: WineBarIcon,
   },
 ];
@@ -114,37 +114,37 @@ const BUDGET_TIERS = [
   {
     id: "daily",
     title: "Daily Executive",
-    range: "₦70,000 – ₦180,000 / day",
-    desc: "Toyota Prado, Lexus ES350, Hilux, Camry, Executive Sedans",
+    range: "\$500 – \$900 / day",
+    desc: "Cadillac Escalade, Mercedes S-Class, Executive Sedans",
   },
   {
     id: "premium",
-    title: "Premium SUV & Executive",
-    range: "₦200,000 – ₦450,000 / day",
-    desc: "Land Cruiser 300, Mercedes E-Class, HiAce VIP, Armored Prado",
+    title: "Premium SUV & Luxury",
+    range: "\$1,000 – \$1,500 / day",
+    desc: "Range Rover Autobiography, Porsche Cayenne Turbo",
   },
   {
     id: "high_luxury",
     title: "High-End Luxury",
-    range: "₦600,000 – ₦1,200,000 / day",
-    desc: "Range Rover SV, Mercedes-Benz G-Wagon, S-Class",
+    range: "\$1,600 – \$2,200 / day",
+    desc: "Rolls-Royce Ghost, Mercedes-Maybach, Lamborghini Urus",
   },
   {
     id: "ultra_exotic",
     title: "Ultra-Exotic & Supercars",
-    range: "₦1,500,000 – ₦3,500,000+ / day",
-    desc: "Rolls-Royce Ghost, Lamborghini Urus, Ferrari F8, Maybach V12",
+    range: "\$2,500 – \$5,000+ / day",
+    desc: "Ferrari F8 Spider, Porsche 911 GT3, Custom Supercars",
   },
   {
     id: "flexible",
     title: "Flexible / Tailored Quote",
     range: "Custom Quotation",
-    desc: "Recommend the best vehicle matching my precise schedule",
+    desc: "Recommend the best vehicle matching my precise itinerary",
   },
 ];
 
 function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-GB", {
+  return date.toLocaleDateString("en-US", {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -154,56 +154,70 @@ function formatDate(date: Date): string {
 
 export default function ConciergeFlow({
   brandName,
-  phone,
+  email = "u22099dandev@gmail.com",
   currency,
 }: ConciergeFlowProps) {
   const [step, setStep] = useState(1);
   const totalSteps = 6;
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("daily_executive");
-  const [selectedOccasion, setSelectedOccasion] = useState<string>(OCCASIONS[0]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("supercar");
+  const [selectedOccasion, setSelectedOccasion] = useState<string>(
+    OCCASIONS[0],
+  );
   const [durationPreset, setDurationPreset] = useState<string>("weekend");
   const [dateRange, setDateRange] = useState<DateRange>({
     checkIn: null,
     checkOut: null,
   });
   const [showCalendar, setShowCalendar] = useState(false);
-  const [locationPreference, setLocationPreference] = useState("Victoria Island / Lekki, Lagos");
-  const [drivingPreference, setDrivingPreference] = useState<"chauffeur" | "self_drive">("chauffeur");
+  const [locationPreference, setLocationPreference] = useState(
+    "Brickell / Miami Beach, FL",
+  );
+  const [drivingPreference, setDrivingPreference] = useState<
+    "chauffeur" | "self_drive"
+  >("chauffeur");
   const [passengers, setPassengers] = useState(2);
   const [selectedServices, setSelectedServices] = useState<string[]>([
     "executive_chauffeur",
   ]);
-  const [selectedBudget, setSelectedBudget] = useState<string>("daily");
+  const [selectedBudget, setSelectedBudget] = useState<string>("premium");
   const [clientName, setClientName] = useState("");
-  const [clientPhone, setClientPhone] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
   const [customNotes, setCustomNotes] = useState("");
 
   const days =
     dateRange.checkIn && dateRange.checkOut
-      ? Math.max(1, Math.round((dateRange.checkOut.getTime() - dateRange.checkIn.getTime()) / (1000 * 60 * 60 * 24)))
+      ? Math.max(
+          1,
+          Math.round(
+            (dateRange.checkOut.getTime() - dateRange.checkIn.getTime()) /
+              (1000 * 60 * 60 * 24),
+          ),
+        )
       : durationPreset === "single"
-      ? 1
-      : durationPreset === "weekend"
-      ? 3
-      : durationPreset === "week"
-      ? 7
-      : 30;
+        ? 1
+        : durationPreset === "weekend"
+          ? 3
+          : durationPreset === "week"
+            ? 7
+            : 30;
 
   const toggleService = (id: string) => {
     setSelectedServices((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 
-  const selectedCategoryObj = VEHICLE_CATEGORIES.find((c) => c.id === selectedCategory);
+  const selectedCategoryObj = VEHICLE_CATEGORIES.find(
+    (c) => c.id === selectedCategory,
+  );
   const selectedBudgetObj = BUDGET_TIERS.find((b) => b.id === selectedBudget);
 
   const activeServiceTitles = selectedServices
     .map((id) => LUXURY_SERVICES.find((s) => s.id === id)?.title)
     .filter(Boolean);
 
-  const generateWhatsAppMessage = () => {
+  const generateEmailContent = () => {
     const datesStr =
       dateRange.checkIn && dateRange.checkOut
         ? `${formatDate(dateRange.checkIn)} to ${formatDate(dateRange.checkOut)} (${days} day${days > 1 ? "s" : ""})`
@@ -211,33 +225,43 @@ export default function ConciergeFlow({
 
     const servicesStr =
       activeServiceTitles.length > 0
-        ? activeServiceTitles.map((s) => `  • ${s}`).join("\n")
-        : "  • Standard VIP Handover";
+        ? activeServiceTitles.map((s) => `• ${s}`).join("\n")
+        : "• Standard VIP Handover";
 
-    return (
-      `*VIP CONCIERGE FLEET SOURCING — ${brandName.toUpperCase()}*\n\n` +
-      `👤 *Client Name:* ${clientName.trim() || "VIP Client"}\n` +
-      (clientPhone.trim() ? `📞 *Contact Phone:* ${clientPhone.trim()}\n` : "") +
-      `🏎️ *Vehicle Category:* ${selectedCategoryObj?.title}\n` +
-      `🎯 *Occasion/Usage:* ${selectedOccasion}\n` +
-      `📅 *Duration & Dates:* ${datesStr}\n` +
-      `📍 *Delivery / Pickup Destination:* ${locationPreference}\n` +
-      `👔 *Driving Preference:* ${drivingPreference === "chauffeur" ? "Executive Chauffeur" : "Self-Drive"}\n` +
-      `👥 *Passengers:* ${passengers}\n` +
-      `💰 *Budget Tier:* ${selectedBudgetObj?.title} (${selectedBudgetObj?.range})\n\n` +
-      `🛡️ *Additional Services Requested:*\n${servicesStr}\n` +
-      (customNotes.trim() ? `\n📝 *Special Requirements:* ${customNotes.trim()}\n` : "") +
-      `\nPlease respond with matching available vehicles, photos, and exact rates.`
-    );
+    const subject = `VIP Fleet Sourcing Inquiry: ${selectedCategoryObj?.title} (${days} Days)`;
+    const body =
+      `VIP CONCIERGE FLEET SOURCING — ${brandName.toUpperCase()}\n\n` +
+      `👤 Client Name: ${clientName.trim() || "VIP Client"}\n` +
+      (clientEmail.trim() ? `✉️ Client Email: ${clientEmail.trim()}\n` : "") +
+      `🏎️ Vehicle Category: ${selectedCategoryObj?.title}\n` +
+      `🎯 Occasion/Usage: ${selectedOccasion}\n` +
+      `📅 Duration & Dates: ${datesStr}\n` +
+      `📍 Handover Destination: ${locationPreference}\n` +
+      `👔 Driving Preference: ${drivingPreference === "chauffeur" ? "Executive Chauffeur" : "Self-Drive"}\n` +
+      `👥 Passengers: ${passengers}\n` +
+      `💰 Budget Tier: ${selectedBudgetObj?.title} (${selectedBudgetObj?.range})\n\n` +
+      `🛡️ Additional Services Requested:\n${servicesStr}\n` +
+      (customNotes.trim()
+        ? `\n📝 Special Requirements: ${customNotes.trim()}\n`
+        : "") +
+      `\nPlease respond with matching available fleet options, high-resolution imagery, and exact rates.\n\nBest regards,`;
+
+    return { subject, body };
   };
 
-  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(generateWhatsAppMessage())}`;
+  const { subject, body } = generateEmailContent();
+  const mailUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
-    <section id="consultation" className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+    <section
+      id="consultation"
+      className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20"
+    >
       <div className="mb-10 text-center">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/8 border border-white/15 mb-3">
-          <AutoAwesomeIcon sx={{ fontSize: 14, color: "var(--color-text-secondary)" }} />
+          <AutoAwesomeIcon
+            sx={{ fontSize: 14, color: "var(--color-text-secondary)" }}
+          />
           <span className="text-[11px] uppercase tracking-[0.2em] text-zinc-300 font-medium">
             Interactive Fleet Questionnaire
           </span>
@@ -246,7 +270,8 @@ export default function ConciergeFlow({
           Configure Your Vehicle Request
         </h2>
         <p className="text-zinc-500 text-xs sm:text-sm max-w-xl mx-auto mt-2">
-          Takes under 60 seconds. Our desk messages you on WhatsApp with verified matching options.
+          Takes under 60 seconds. Our concierge desk will review your itinerary
+          and email matching fleet options instantly.
         </p>
 
         <div className="flex items-center justify-between gap-2 mt-8 max-w-md mx-auto">
@@ -261,8 +286,8 @@ export default function ConciergeFlow({
                 step > i + 1
                   ? "bg-white"
                   : step === i + 1
-                  ? "bg-white scale-y-125"
-                  : "bg-zinc-800"
+                    ? "bg-white scale-y-125"
+                    : "bg-zinc-800"
               }`}
               title={`Go to step ${i + 1}`}
             />
@@ -286,7 +311,8 @@ export default function ConciergeFlow({
                 1. What category of vehicle do you require?
               </h3>
               <p className="text-stone-400 text-xs sm:text-sm mt-1">
-                From high-roller exotics to reliable Nigerian road workhorses.
+                From high-performance supercars to elite chauffeur-driven
+                sedans.
               </p>
             </div>
 
@@ -310,11 +336,20 @@ export default function ConciergeFlow({
                         <IconComponent sx={{ fontSize: 22 }} />
                       </div>
                       {isSelected && (
-                        <CheckCircleIcon sx={{ fontSize: 20, color: "var(--color-accent-primary)" }} />
+                        <CheckCircleIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "var(--color-accent-primary)",
+                          }}
+                        />
                       )}
                     </div>
-                    <h4 className="text-white font-semibold text-[15px]">{cat.title}</h4>
-                    <p className="text-zinc-400 text-[12px] mt-1 leading-snug">{cat.subtitle}</p>
+                    <h4 className="text-white font-semibold text-[15px]">
+                      {cat.title}
+                    </h4>
+                    <p className="text-zinc-400 text-[12px] mt-1 leading-snug">
+                      {cat.subtitle}
+                    </p>
                   </button>
                 );
               })}
@@ -329,7 +364,8 @@ export default function ConciergeFlow({
                 2. What is the occasion or purpose of rental?
               </h3>
               <p className="text-zinc-400 text-xs sm:text-sm mt-1">
-                Helps us recommend appropriate security, driver etiquette, and vehicle finish.
+                Helps us coordinate appropriate delivery specs, driver protocol,
+                and vehicle prep.
               </p>
             </div>
 
@@ -349,7 +385,12 @@ export default function ConciergeFlow({
                   >
                     <span className="text-[13px] font-medium">{occ}</span>
                     {isSelected && (
-                      <CheckCircleIcon sx={{ fontSize: 18, color: "var(--color-accent-primary)" }} />
+                      <CheckCircleIcon
+                        sx={{
+                          fontSize: 18,
+                          color: "var(--color-accent-primary)",
+                        }}
+                      />
                     )}
                   </button>
                 );
@@ -362,10 +403,10 @@ export default function ConciergeFlow({
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold text-white font-serif">
-                3. Rental Duration &amp; Delivery Destination
+                3. Rental Duration &amp; Handover Destination
               </h3>
               <p className="text-zinc-400 text-xs sm:text-sm mt-1">
-                Choose a duration shortcut or pick specific calendar dates.
+                Choose a duration shortcut or pick precise calendar dates.
               </p>
             </div>
 
@@ -376,10 +417,10 @@ export default function ConciergeFlow({
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[
-                    { id: "single", label: "1 Day (Today/Tomorrow)" },
+                    { id: "single", label: "1 Day (Immediate)" },
                     { id: "weekend", label: "Weekend (2-3 Days)" },
                     { id: "week", label: "1 Week (7 Days)" },
-                    { id: "month", label: "Monthly / Long-term" },
+                    { id: "month", label: "Monthly / Extended" },
                   ].map((preset) => (
                     <button
                       key={preset.id}
@@ -407,7 +448,9 @@ export default function ConciergeFlow({
                   className="w-full flex items-center justify-between p-3.5 bg-zinc-800 rounded-xl border border-zinc-700 hover:border-zinc-500 text-left transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-2.5">
-                    <CalendarMonthIcon sx={{ fontSize: 18, color: "var(--color-text-dim)" }} />
+                    <CalendarMonthIcon
+                      sx={{ fontSize: 18, color: "var(--color-text-dim)" }}
+                    />
                     <span className="text-zinc-200 text-[13px] font-medium">
                       {dateRange.checkIn && dateRange.checkOut
                         ? `${formatDate(dateRange.checkIn)} → ${formatDate(dateRange.checkOut)} (${days} days)`
@@ -428,7 +471,7 @@ export default function ConciergeFlow({
 
               <div>
                 <label className="text-zinc-300 text-xs uppercase tracking-wider font-semibold block mb-2">
-                  Delivery / Handover Destination
+                  Handover Destination
                 </label>
                 <div className="relative">
                   <PlaceIcon
@@ -439,7 +482,7 @@ export default function ConciergeFlow({
                     type="text"
                     value={locationPreference}
                     onChange={(e) => setLocationPreference(e.target.value)}
-                    placeholder="e.g. VIP Tarmac FBO, Ikoyi Residence, Lekki Phase 1, Abuja FCT"
+                    placeholder="e.g. Miami FBO Tarmac, Beverly Hills Hotel, Mayfair London"
                     className="w-full pl-10 pr-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-sm focus:border-zinc-400 focus:outline-none"
                   />
                 </div>
@@ -470,16 +513,24 @@ export default function ConciergeFlow({
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <PeopleIcon sx={{ fontSize: 22, color: "var(--color-text-secondary)" }} />
+                  <PeopleIcon
+                    sx={{ fontSize: 22, color: "var(--color-text-secondary)" }}
+                  />
                   {drivingPreference === "chauffeur" && (
-                    <CheckCircleIcon sx={{ fontSize: 18, color: "var(--color-accent-primary)" }} />
+                    <CheckCircleIcon
+                      sx={{
+                        fontSize: 18,
+                        color: "var(--color-accent-primary)",
+                      }}
+                    />
                   )}
                 </div>
                 <h4 className="text-white font-semibold text-[15px]">
                   Executive Chauffeur
                 </h4>
                 <p className="text-zinc-400 text-[12px] mt-1">
-                  Professional driver, zero road stress, familiar with VIP protocols.
+                  Professional suited driver, airport meet &amp; greet, zero
+                  travel stress.
                 </p>
               </button>
 
@@ -493,22 +544,34 @@ export default function ConciergeFlow({
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <DirectionsCarFilledIcon sx={{ fontSize: 22, color: "var(--color-text-secondary)" }} />
+                  <DirectionsCarFilledIcon
+                    sx={{ fontSize: 22, color: "var(--color-text-secondary)" }}
+                  />
                   {drivingPreference === "self_drive" && (
-                    <CheckCircleIcon sx={{ fontSize: 18, color: "var(--color-accent-primary)" }} />
+                    <CheckCircleIcon
+                      sx={{
+                        fontSize: 18,
+                        color: "var(--color-accent-primary)",
+                      }}
+                    />
                   )}
                 </div>
-                <h4 className="text-white font-semibold text-[15px]">Self-Drive Experience</h4>
+                <h4 className="text-white font-semibold text-[15px]">
+                  Self-Drive Experience
+                </h4>
                 <p className="text-zinc-400 text-[12px] mt-1">
-                  Requires valid driver license and refundable security deposit.
+                  Requires valid driver’s license and refundable security
+                  deposit.
                 </p>
               </button>
             </div>
 
             <div className="p-4 bg-zinc-800 rounded-xl border border-zinc-700 flex items-center justify-between">
               <div>
-                <h4 className="text-white text-sm font-medium">Passenger Count</h4>
-                <p className="text-zinc-500 text-xs">Number of people travelling</p>
+                <h4 className="text-white text-sm font-medium">
+                  Passenger Count
+                </h4>
+                <p className="text-zinc-500 text-xs">Number of occupants</p>
               </div>
               <div className="flex items-center gap-3">
                 <button
@@ -518,7 +581,9 @@ export default function ConciergeFlow({
                 >
                   −
                 </button>
-                <span className="text-white font-semibold text-sm">{passengers}</span>
+                <span className="text-white font-semibold text-sm">
+                  {passengers}
+                </span>
                 <button
                   type="button"
                   onClick={() => setPassengers(Math.min(14, passengers + 1))}
@@ -535,10 +600,10 @@ export default function ConciergeFlow({
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold text-white font-serif">
-                5. Additional Services (Paramount to Luxury Rentals)
+                5. Additional Services (Concierge Add-ons)
               </h3>
               <p className="text-zinc-400 text-xs sm:text-sm mt-1">
-                Select bespoke additions essential to high-profile executive operations.
+                Select bespoke additions essential to high-end luxury rentals.
               </p>
             </div>
 
@@ -562,7 +627,9 @@ export default function ConciergeFlow({
                         <IconComp sx={{ fontSize: 18 }} />
                       </div>
                       <div>
-                        <h4 className="text-white text-[14px] font-medium">{srv.title}</h4>
+                        <h4 className="text-white text-[14px] font-medium">
+                          {srv.title}
+                        </h4>
                         <p className="text-zinc-400 text-[11px]">{srv.desc}</p>
                       </div>
                     </div>
@@ -586,10 +653,11 @@ export default function ConciergeFlow({
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h3 className="text-xl sm:text-2xl font-semibold text-white font-serif">
-                6. Budget Tier &amp; Instant WhatsApp Sourcing
+                6. Budget Tier &amp; Instant Email Concierge Dispatch
               </h3>
               <p className="text-zinc-400 text-xs sm:text-sm mt-1">
-                Confirm your daily budget preference and contact details for instant dispatch.
+                Confirm your daily budget preference and contact details for our
+                team to email you matching options.
               </p>
             </div>
 
@@ -612,11 +680,20 @@ export default function ConciergeFlow({
                         {tier.title}
                       </span>
                       {isSelected && (
-                        <CheckCircleIcon sx={{ fontSize: 16, color: "var(--color-accent-primary)" }} />
+                        <CheckCircleIcon
+                          sx={{
+                            fontSize: 16,
+                            color: "var(--color-accent-primary)",
+                          }}
+                        />
                       )}
                     </div>
-                    <p className="text-zinc-300 font-semibold text-[13px]">{tier.range}</p>
-                    <p className="text-zinc-500 text-[11px] mt-1">{tier.desc}</p>
+                    <p className="text-zinc-300 font-semibold text-[13px]">
+                      {tier.range}
+                    </p>
+                    <p className="text-zinc-500 text-[11px] mt-1">
+                      {tier.desc}
+                    </p>
                   </button>
                 );
               })}
@@ -631,20 +708,20 @@ export default function ConciergeFlow({
                   type="text"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
-                  placeholder="e.g. Chief Adeleke / Mr. Victor"
+                  placeholder="e.g. Mr. Alexander Wright"
                   className="w-full px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-sm focus:border-zinc-400 focus:outline-none"
                 />
               </div>
 
               <div>
                 <label className="text-zinc-400 text-xs uppercase tracking-wider font-semibold block mb-1.5">
-                  Phone Number (Optional)
+                  Email Address
                 </label>
                 <input
-                  type="tel"
-                  value={clientPhone}
-                  onChange={(e) => setClientPhone(e.target.value)}
-                  placeholder="e.g. 0803 123 4567"
+                  type="email"
+                  value={clientEmail}
+                  onChange={(e) => setClientEmail(e.target.value)}
+                  placeholder="e.g. alexander@company.com"
                   className="w-full px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-sm focus:border-zinc-400 focus:outline-none"
                 />
               </div>
@@ -658,48 +735,64 @@ export default function ConciergeFlow({
                 type="text"
                 value={customNotes}
                 onChange={(e) => setCustomNotes(e.target.value)}
-                placeholder="Specific exterior color, armed escort detail count, airport flight number..."
+                placeholder="Specific exterior color, private aviation flight number, security detail requirements..."
                 className="w-full px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-sm focus:border-zinc-400 focus:outline-none"
               />
             </div>
 
             <div className="p-5 bg-zinc-800 rounded-xl border border-zinc-700 space-y-3">
               <div className="flex items-center gap-2 text-zinc-300">
-                <AutoAwesomeIcon sx={{ fontSize: 16, color: "var(--color-text-dim)" }} />
+                <AutoAwesomeIcon
+                  sx={{ fontSize: 16, color: "var(--color-text-dim)" }}
+                />
                 <span className="text-[11px] uppercase font-semibold tracking-wider">
                   Request Summary
                 </span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[12px]">
                 <div>
-                  <span className="text-zinc-500 block text-[10px] uppercase">Category</span>
-                  <span className="font-semibold text-white">{selectedCategoryObj?.title}</span>
-                </div>
-                <div>
-                  <span className="text-zinc-500 block text-[10px] uppercase">Driving</span>
+                  <span className="text-zinc-500 block text-[10px] uppercase">
+                    Category
+                  </span>
                   <span className="font-semibold text-white">
-                    {drivingPreference === "chauffeur" ? "Chauffeur" : "Self-Drive"}
+                    {selectedCategoryObj?.title}
                   </span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-[10px] uppercase">Duration</span>
-                  <span className="font-semibold text-white">~{days} Day{days > 1 ? "s" : ""}</span>
+                  <span className="text-zinc-500 block text-[10px] uppercase">
+                    Driving
+                  </span>
+                  <span className="font-semibold text-white">
+                    {drivingPreference === "chauffeur"
+                      ? "Chauffeur"
+                      : "Self-Drive"}
+                  </span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 block text-[10px] uppercase">Services</span>
-                  <span className="font-semibold text-white">{activeServiceTitles.length} Selected</span>
+                  <span className="text-zinc-500 block text-[10px] uppercase">
+                    Duration
+                  </span>
+                  <span className="font-semibold text-white">
+                    ~{days} Day{days > 1 ? "s" : ""}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-zinc-500 block text-[10px] uppercase">
+                    Services
+                  </span>
+                  <span className="font-semibold text-white">
+                    {activeServiceTitles.length} Selected
+                  </span>
                 </div>
               </div>
             </div>
 
             <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-3 py-4 rounded-xl font-bold text-base bg-brand-whatsapp text-black hover:bg-brand-whatsapp-hover transition-all duration-200 shadow-[0_0_25px_var(--color-brand-whatsapp-glow)] cursor-pointer"
+              href={mailUrl}
+              className="w-full flex items-center justify-center gap-3 py-4 rounded-xl font-bold text-base bg-white text-black hover:bg-zinc-200 transition-all duration-200 shadow-lg cursor-pointer"
             >
-              <WhatsAppIcon sx={{ fontSize: 22 }} />
-              Dispatch VIP Request to Fleet WhatsApp
+              <EmailIcon sx={{ fontSize: 22 }} />
+              Dispatch VIP Request to Concierge Desk
             </a>
           </div>
         )}
@@ -722,7 +815,7 @@ export default function ConciergeFlow({
             <button
               type="button"
               onClick={() => setStep(step + 1)}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-accent-primary text-accent-contrast hover:bg-accent-hover text-xs font-bold uppercase tracking-wider cursor-pointer transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white text-black hover:bg-zinc-200 text-xs font-bold uppercase tracking-wider cursor-pointer transition-colors"
             >
               Continue
               <ArrowForwardIcon sx={{ fontSize: 14 }} />

@@ -64,7 +64,7 @@ export default function ConciergeGallery() {
           </h2>
         </div>
         <p className="text-zinc-500 text-xs sm:text-[13px] max-w-xs">
-          150+ verified vehicles across Lagos, Abuja & nationwide partners.
+          150+ verified vehicles across Miami, London & nationwide partners.
         </p>
       </div>
 
@@ -82,7 +82,7 @@ export default function ConciergeGallery() {
                   : "border-zinc-800 opacity-80 hover:opacity-100"
               }`}
             >
-              <div className="aspect-[3/4] sm:aspect-[4/5] w-full relative bg-zinc-900">
+              <div className="aspect-3/4 sm:aspect-4/5 w-full relative bg-zinc-900">
                 <img
                   src={tier.image}
                   alt={tier.title}
@@ -90,7 +90,7 @@ export default function ConciergeGallery() {
                   loading="lazy"
                 />
                 {/* Strong gradient for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent" />
 
                 {/* Badge */}
                 <div className="absolute top-2 left-2 sm:top-3 sm:left-3">

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${brand.name} | Fleet Management & Car Rental`,
     description: `${brand.tagline} Luxury car rental, wedding cars, airport transfers and corporate transport. Request a vehicle on WhatsApp.`,
+    images: "/logo.jpeg",
     type: "website",
   },
 };

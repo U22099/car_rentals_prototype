@@ -8,7 +8,9 @@ export interface BrandProperties {
     instagram: string;
     facebook: string;
     tiktok: string;
-  }
+  };
+  address: string;
+  city: string;
 }
 
 export const brand: BrandProperties = {
@@ -20,6 +22,8 @@ export const brand: BrandProperties = {
   socials: {
     instagram: "https://www.instagram.com/doubleitanze",
     facebook: "https://www.facebook.com/share/18NHNVFE8a/",
-    tiktok: "https://www.tiktok.com/@doubleitanze01"
-  }
+    tiktok: "https://www.tiktok.com/@doubleitanze01",
+  },
+  address: "1, awonde strt, off ajesa strt Wuse 2, Abuja",
+  city: "Abuja",
 };

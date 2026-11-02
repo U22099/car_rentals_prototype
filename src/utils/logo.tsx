@@ -12,7 +12,7 @@ export default function Logo({ size = 44 }: LogoProps) {
     >
       <Image
         src="/logo.jpeg"
-        alt="DOUBLE I.TANZE LTD. logo"
+        alt="DOUBLE ITANZE LTD. logo"
         width={size}
         height={size}
         className="h-full w-full object-cover"

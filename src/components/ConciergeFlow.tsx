@@ -153,7 +153,7 @@ export default function ConciergeFlow({
   return (
     <section id="booking" className="w-full max-w-5xl mx-auto px-4 sm:px-8 py-16 sm:py-20 scroll-mt-20">
       <div className="mb-8 sm:mb-10">
-        <p className="text-[11px] tracking-[0.22em] uppercase text-[#1a8fff] font-semibold mb-3">Book with DOUBLE I.TANZE</p>
+        <p className="text-[11px] tracking-[0.22em] uppercase text-[#1a8fff] font-semibold mb-3">Book with DOUBLE ITANZE</p>
         <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">Tell us about your trip.</h2>
         <p className="text-zinc-400 text-sm max-w-xl mt-2 leading-relaxed">
           Share a few details and send your request directly to our WhatsApp team. Availability and final pricing are confirmed with you.

@@ -32,7 +32,7 @@ export default function ConciergeGallery({
               Our vehicles
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold text-white leading-tight">
-              The DOUBLE I.TANZE fleet
+              The DOUBLE ITANZE fleet
             </h2>
           </div>
           <p className="text-zinc-400 text-sm max-w-sm leading-relaxed">

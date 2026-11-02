@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description,
   applicationName: brand.name,
   keywords: [
-    "Double I.Tanze",
+    "Double Itanze",
     "car hire Nigeria",
     "car rental Nigeria",
     "fleet management",
